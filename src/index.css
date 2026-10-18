@@ -14,6 +14,7 @@
   border-radius: calc(0.25rem * 2);
   border-width: calc(0.25rem * 0.5);
   width: calc(0.25rem * 50);
+  cursor: pointer;
 }
 @utility btn-primary{
   @apply btn;
@@ -27,5 +28,8 @@
 border-color: var(--color-brand-light);
 color: var(--color-brand-light)
 
+}
 
+html{
+  scroll-behavior: smooth;
 }
