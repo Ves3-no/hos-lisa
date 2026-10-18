@@ -3,8 +3,28 @@
 @theme {
   --color-brand-primary: #D1C3B8;
   --color-brand-dark: #010102;
-  --color-brand-light: #EBEBEB;
+  --color-brand-light: #f7f7f7f7;
   
   --font-heading: 'Playfair Display', serif;
   --font-body: 'Montserrat', sans-serif;
+}
+@utility btn{
+  font: var(--font-body);
+  padding: calc(0.25rem * 3);
+  border-radius: calc(0.25rem * 2);
+  border-width: calc(0.25rem * 0.5);
+  width: calc(0.25rem * 50);
+}
+@utility btn-primary{
+  @apply btn;
+  background: var(--color-brand-light);
+  color: var(--color-brand-primary);
+  
+}
+@utility btn-secondary{
+@apply btn;
+border-color: var(--color-brand-light);
+color: var(--color-brand-light)
+
+
 }

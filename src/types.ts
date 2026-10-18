@@ -7,3 +7,7 @@ export type product = {
     stock: number
     image_url: string
 }
+export type Image = {
+    id: string
+    use: "carousel" | "header"
+}
