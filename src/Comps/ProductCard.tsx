@@ -1,19 +1,22 @@
 import type { product } from "../types";
 
-import { motion } from "motion/react";
+import { easeInOut, motion, spring } from "motion/react";
 import { Link } from "react-router-dom";
 
 export default function Main({product, index} : {product: product, index:number}){
     return(
-        <motion.div key={index} className="h-160 w-100 bg-brand-primary p-8 rounded-lg">
-            <motion.div>
-              <motion.img src={product.image_url} className="h-[60%] rounded-lg w-auto aspect-2/3 object-center object-cover"/>
-            </motion.div>
-            <div className="font-body text-brand-dark">
-                <h1 className="font-heading text-2xl">{product.name}</h1>
-                <p>{product.price}kr</p>
-                <Link to={"/Product?id=" + product.id}>Se mer</Link>
+        <motion.div key={index} className="h-auto w-100 bg-brand-primary p-8 rounded-lg">
+            <div className="overflow-hidden aspect-12/13 w-full">
+                <motion.img whileHover={{scale: 1.125}} transition={{type: "spring", stiffness: 200, damping: 20}} src={product.image_url} className="w-full rounded-lg aspect-12/13 object-bottom object-cover"/>
             </div>
+            <div className="font-body text-brand-dark">
+                <h1 className="font-heading text-2xl mt-2">{product.name}</h1>
+                <p className="mt-px text-brand-dark/40">{product.price}kr</p>
+                <div className="flex flex-row justify-between mt-2">
+                    <motion.div className="btn-primary w-40" whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }}><Link to={"/Product?id=" + product.id}>Se mer</Link></motion.div>
+                    <motion.button className="btn-secondary w-40" whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }}>Legg i handlekurv</motion.button>                             
+                </div>
+                </div>
         </motion.div>
     )
 }

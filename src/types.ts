@@ -6,6 +6,8 @@ export type product = {
     price: number
     stock: number
     image_url: string
+    image_url_1: string | null
+    image_url_2: string | null
 }
 export type Image = {
     id: string

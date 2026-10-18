@@ -19,6 +19,7 @@
   @apply btn;
   background: var(--color-brand-light);
   color: var(--color-brand-primary);
+  border-color: var(--color-brand-light);
   
 }
 @utility btn-secondary{

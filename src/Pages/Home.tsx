@@ -24,9 +24,9 @@ export default function Main({Products}: {Products: product[] | undefined}){
             <section id="ImageCarusell">
 
             </section>
-            <section id="Collection">
-                <h2 className="text-3xl font-heading">Produkter</h2>
-                <div className="flex flex-row gap-10 flex-wrap">
+            <section id="Collection" className="my-10">
+                <h2 className="text-5xl font-heading text-center font-semibold ">Produkter</h2>
+                <div className="flex flex-row gap-10 flex-wrap justify-center mt-10">
                     {Products?.slice(0, 3).map((prod, index)=>(
                         <ProductCard product={prod} index={index} /> 
                     ))}
