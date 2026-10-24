@@ -39,9 +39,9 @@ export default function Main({products}: {products: product[]  | undefined}){
             </div>
 
             <div className="flex items-center gap-6 mt-6">
-                <motion.button onClick={handlePrev} className="btn w-30 bg-brand-primary text-brand-dark border-brand-primary cursor-pointer" whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }} > ← Forgje</motion.button>
+                <motion.button onClick={handlePrev} className="btn w-30 bg-brand-primary text-brand-secondary border-brand-primary cursor-pointer" whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }} > ← Forgje</motion.button>
                 <span className="text-sm font-medium text-brand-dark/50"> {currentIndex + 1} av {products.length}</span>
-                <motion.button onClick={handleNext} className="btn w-30 bg-brand-primary text-brand-dark border-brand-primary cursor-pointer" whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }} >Neste →</motion.button>
+                <motion.button onClick={handleNext} className="btn w-30 bg-brand-primary text-brand-secondary border-brand-primary cursor-pointer" whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }} >Neste →</motion.button>
             </div>
         </div>
     )

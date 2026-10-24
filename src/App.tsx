@@ -40,13 +40,14 @@ function App() {
       const json: Image[] = data as Image[]
       setImages(json)
     }
+    getImages()
     getProducts()
   }, [])
   return (
    <div className='bg-brand-light'>
     <NavComp setCartIsOpen={setCartIsOpen}/>
     <Routes>
-        <Route path='/' element={<Home Products={Products}/>} />
+        <Route path='/' element={<Home Products={Products} images={images}/>}/>
         <Route path='/Product' element={<ProductPage Products={Products}/>} />
         <Route path='/Products' element={<ProductsPage Products={Products}/>} />
     </Routes>

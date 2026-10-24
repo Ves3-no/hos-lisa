@@ -7,15 +7,15 @@ import logo from "/843339068_18117228145909344_2576512124900151496_n.jpg"
 
 export default function Main({setCartIsOpen}: {setCartIsOpen: any}){
     return(
-        <nav className="h-20 flex flex-row justify-between items-center px-16 bg-brand-light">
+        <nav className="h-20 -mb-20 flex flex-row justify-between items-center px-16 bg-brand-primary sticky top-2.5 w-[60%] mx-auto rounded-2xl z-30 shadow-2xl ">
             <div>
-                <img src={logo} alt="" className="w-16 rounded-[50%]"/>
+                <img src={logo} alt="" className="w-16 rounded-[50%] border-2 border-brand-light"/>
             </div>
             <div className="flex flex-row items-center justify-center gap-8">
-                <div className="flex flex-row gap-8 font-body">
-                    <motion.div whileHover={{y: -3, scale: 1.05}} whileTap={{y: 1.5, scale: 0.98}} transition={{type: "spring", stiffness: 400, damping: 16}} className="bg-brand-primary p-0.5 w-28 text-center rounded-sm flex items-center justify-center"><Link to="/" className="text-brand-light">Hjem</Link></motion.div>
-                    <motion.div whileHover={{y: -3, scale: 1.05}} whileTap={{y: 1.5, scale: 0.98}} transition={{type: "spring", stiffness: 400, damping: 16}} className="bg-brand-primary p-0.5 w-28 text-center rounded-sm flex items-center justify-center"><Link to="/Products" className="text-brand-light">Produkter</Link></motion.div>
-                    <motion.div whileHover={{y: -3, scale: 1.05}} whileTap={{y: 1.5, scale: 0.98}} transition={{type: "spring", stiffness: 400, damping: 16}} className="bg-brand-primary p-0.5 w-28 text-center rounded-sm flex items-center justify-center"><button className="text-brand-light">Handlekurv</button></motion.div>         
+                <div className="flex flex-row gap-6 font-body">
+                    <motion.div whileHover={{y: -3, scale: 1.05}} whileTap={{y: 1.5, scale: 0.98}} transition={{type: "spring", stiffness: 400, damping: 16}}><Link to="/" className="text-brand-secondary bg-brand-light cursor-pointer p-0.5 w-28 text-center rounded-sm flex items-center justify-center">Hjem</Link></motion.div>
+                    <motion.div whileHover={{y: -3, scale: 1.05}} whileTap={{y: 1.5, scale: 0.98}} transition={{type: "spring", stiffness: 400, damping: 16}}><Link to="/Products" className="text-brand-secondary bg-brand-light cursor-pointer p-0.5 w-28 text-center rounded-sm flex items-center justify-center">Produkter</Link></motion.div>
+                    <motion.div whileHover={{y: -3, scale: 1.05}} whileTap={{y: 1.5, scale: 0.98}} transition={{type: "spring", stiffness: 400, damping: 16}}><button className="text-brand-secondary bg-brand-light cursor-pointer p-0.5 w-28 text-center rounded-sm flex items-center justify-center">Handlekurv</button></motion.div>         
                 </div>
                 <motion.div whileHover={{y: -3, scale: 1.05}} whileTap={{y: 1.5, scale: 0.98}} transition={{type: "spring", stiffness: 400, damping: 16}} className="bg-brand-primary h-8 w-8 p-1 text-brand-light rounded-sm" >
                     <Link to="https://www.instagram.com/hos.liisa/">
