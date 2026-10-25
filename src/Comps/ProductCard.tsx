@@ -12,8 +12,8 @@ export default function Main({product, index, addToCart} : {product: product, in
                 <h1 className="font-heading text-2xl mt-2">{product.name}</h1>
                 <p className="mt-px text-brand-secondary/50">{product.price}kr</p>
                 <div className="flex flex-row justify-between mt-2 gap-2">
-                    <motion.a href={"/Product?id=" + product.id} whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }} className="btn-primary w-40 text-center leading-12">Se mer</motion.a>
-                    <motion.button onClick={()=> addToCart(product)} className="btn-secondary w-40" whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }}>Legg i handlekurv</motion.button>                             
+                    <motion.a href={"/Product?id=" + product.id} whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }} className="btn-primary w-40 text-center md:leading-normal leading-12">Se mer</motion.a>
+                    <motion.button onClick={()=> addToCart(product, 1)} className="btn-secondary w-40" whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }}>Legg i handlekurv</motion.button>                             
                 </div>
                 </div>
         </motion.div>

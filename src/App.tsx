@@ -43,7 +43,14 @@ function App() {
       const json: Image[] = data as Image[]
       setImages(json)
     }
+    function GetCart(){
+      let string = localStorage.getItem("Cart")
+      if(!string) return
+      let cart =JSON.parse(string) as product[]
+      setCart(cart)
+    }
     getImages()
+    GetCart()
     getProducts()
   }, [])
 
@@ -54,6 +61,7 @@ function App() {
     }
     setCart(newcart)
     setCartIsOpen(true)
+    localStorage.setItem("Cart", JSON.stringify(newcart))
   }
   function removeFromCart(product: product){
     const indexToRemove = Cart.findIndex(item => item.id === product.id);
