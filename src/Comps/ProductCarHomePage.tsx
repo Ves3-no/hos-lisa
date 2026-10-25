@@ -1,9 +1,9 @@
 import { useState } from "react";
 import type { product } from "../types";
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 import ProductCard from "./ProductCard"
 
-export default function Main({products}: {products: product[]  | undefined}){
+export default function Main({products, addToCart}: {products: product[]  | undefined, addToCart: any}){
     const [currentIndex, setCurrentIndex] = useState(0);
 
 
@@ -32,13 +32,13 @@ export default function Main({products}: {products: product[]  | undefined}){
 
                     return (
                         <motion.div className="absolute" key={product.id} initial={false} animate={{x: offset * 340, scale: offset === 0 ? 1 : 0.85,opacity: offset === 0 ? 1 : 0.4, zIndex: offset === 0 ? 10 : 1,}}transition={{ duration: 0.4, ease: "easeInOut" }} onClick={() => setCurrentIndex(index)} >
-                            <ProductCard product={product} index={index} />
+                            <ProductCard product={product} index={index} addToCart={addToCart} />
                         </motion.div>
                     )
                 })}
             </div>
 
-            <div className="flex items-center gap-6 mt-6">
+            <div className="flex items-center gap-6 mt-12">
                 <motion.button onClick={handlePrev} className="btn w-30 bg-brand-primary text-brand-secondary border-brand-primary cursor-pointer" whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }} > ← Forgje</motion.button>
                 <span className="text-sm font-medium text-brand-dark/50"> {currentIndex + 1} av {products.length}</span>
                 <motion.button onClick={handleNext} className="btn w-30 bg-brand-primary text-brand-secondary border-brand-primary cursor-pointer" whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }} >Neste →</motion.button>

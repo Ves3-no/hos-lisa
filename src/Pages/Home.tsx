@@ -2,10 +2,10 @@
 import { Link } from "react-router-dom"
 import ProductCar from "../Comps/ProductCarHomePage"
 import type { Image, product } from "../types"
-import { motion, number } from "motion/react"
+import { motion } from "motion/react"
 import ImageCarusel from "../Comps/ImageCarusel"
 
-export default function Main({Products, images}: {Products: product[] | undefined, images: Image[] | undefined}){
+export default function Main({Products, images, addToCart}: {Products: product[] | undefined, images: Image[] | undefined, addToCart:any}){
     return(
         <>
             <div id="Header">
@@ -25,12 +25,12 @@ export default function Main({Products, images}: {Products: product[] | undefine
             </section>
             <section id="Collection" className="my-10">
                 <h2 className="text-5xl font-heading text-center font-semibold text-brand-secondary">Produkter</h2>
-                <ProductCar products={Products} />
+                <ProductCar products={Products} addToCart={addToCart} />
             </section>
             <section id="About" className="h-auto p-8 bg-brand-primary flex flex-row items-center justify-center ">
                 <div className="w-152 bg-brand-light p-8 rounded-l-2xl ">
                     <h1 className="font-semibold font-heading text-3xl mb-px text-brand-secondary">Hos Lisa</h1>
-                    <p className="font-body text-brand-dark mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam cum quis consequatur quae ex ipsum molestias odio tenetur! Corporis quisquam nobis quo quibusdam veniam! Repellat totam ullam exercitationem amet temporibus!</p>
+                    <p className="font-body text-brand-dark mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam cum quis consequatur quae ex ipsum molestias odio tenetur! Corporis quisquam nobis quo quibusdam veniam! Repellat totam ullam exercitationem amet temporibus! Ta kontakt på <span className="font-semibold">+47 123 45 678</span> om du lurer på noe</p>
                     <div className="flex flex-row gap-4 items-center font-body mt-4">
                         <motion.a whileHover={{y: -3, scale: 1.05}} whileTap={{y: 1.5, scale: 0.98}} transition={{type: "spring", stiffness: 400, damping: 16}} className="btn-primary text-center p-1 bg-brand-primary text-brand-light border-brand-primary ">Produkter</motion.a>
                         <motion.div whileHover={{y: -3, scale: 1.05}} whileTap={{y: 1.5, scale: 0.98}} transition={{type: "spring", stiffness: 400, damping: 16}} className=" h-8 w-8 text-brand-primary rounded-sm">

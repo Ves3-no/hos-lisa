@@ -8,6 +8,9 @@ import ProductPage from "./Pages/Product.tsx"
 import FooterComp from "./Comps/Footer.tsx"
 import ProductsPage from "./Pages/Products.tsx"
 import { supabase } from './supabase.ts'
+import Thanks from "./Pages/Thanks.tsx"
+import Auth from "./Pages/Auth.tsx"
+import Db from "./Pages/Db.tsx"
 
 
 
@@ -43,15 +46,28 @@ function App() {
     getImages()
     getProducts()
   }, [])
+
+  function addToCart(product: product){
+    setCart([...Cart, product])
+    setCartIsOpen(true)
+  }
+  function removeFromCart(product: product){
+    const indexToRemove = Cart.findIndex(item => item.id === product.id);
+    setCart([...Cart.slice(0, indexToRemove), ...Cart.slice(indexToRemove + 1)
+  ]);
+  }
   return (
    <div className='bg-brand-light'>
-    <NavComp setCartIsOpen={setCartIsOpen}/>
+    <NavComp setCartIsOpen={setCartIsOpen} cartIsOpen={cartIsOpen}/>
     <Routes>
-        <Route path='/' element={<Home Products={Products} images={images}/>}/>
-        <Route path='/Product' element={<ProductPage Products={Products}/>} />
-        <Route path='/Products' element={<ProductsPage Products={Products}/>} />
+        <Route path='/' element={<Home Products={Products} addToCart={addToCart} images={images}/>}/>
+        <Route path='/Product' element={<ProductPage Products={Products} addToCart={addToCart}/>} />
+        <Route path='/Products' element={<ProductsPage Products={Products} addToCart={addToCart}/>} />
+        <Route path='/success' element={<Thanks/>}></Route>
+        <Route path='/auth' element={<Auth/>}></Route>
+        <Route path='/Dashboard' element={<Db/>}></Route>
     </Routes>
-    <CartComp setCartIsOpen={setCartIsOpen} cartIsOpen={cartIsOpen} Cart={Cart}/>
+    <CartComp setCartIsOpen={setCartIsOpen} cartIsOpen={cartIsOpen} Cart={Cart} removeFromCart={removeFromCart}/>
     <FooterComp />
    </div>
   )

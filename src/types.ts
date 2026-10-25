@@ -14,3 +14,7 @@ export type Image = {
     use: "carousel" | "header"
     url: string
 }
+export type CartItem ={
+    productId: string
+    quantity: number
+}
