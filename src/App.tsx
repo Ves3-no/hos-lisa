@@ -47,8 +47,12 @@ function App() {
     getProducts()
   }, [])
 
-  function addToCart(product: product){
-    setCart([...Cart, product])
+  function addToCart(product: product, count: number){
+    var newcart: product[] = Cart
+    for(let i = 0; i < count; i++){
+      newcart = [...newcart, product]
+    }
+    setCart(newcart)
     setCartIsOpen(true)
   }
   function removeFromCart(product: product){
@@ -57,7 +61,7 @@ function App() {
   ]);
   }
   return (
-   <div className='bg-brand-light'>
+   <div className='bg-brand-light w-full overflow-x-hidden'>
     <NavComp setCartIsOpen={setCartIsOpen} cartIsOpen={cartIsOpen}/>
     <Routes>
         <Route path='/' element={<Home Products={Products} addToCart={addToCart} images={images}/>}/>
@@ -67,7 +71,7 @@ function App() {
         <Route path='/auth' element={<Auth/>}></Route>
         <Route path='/Dashboard' element={<Db/>}></Route>
     </Routes>
-    <CartComp setCartIsOpen={setCartIsOpen} cartIsOpen={cartIsOpen} Cart={Cart} removeFromCart={removeFromCart}/>
+    <CartComp cartIsOpen={cartIsOpen} Cart={Cart} removeFromCart={removeFromCart}/>
     <FooterComp />
    </div>
   )

@@ -18,6 +18,9 @@ export default function Main(){
             console.log(error.message)
             setError(error.message)
         }
+        if(user || !error){
+            window.location.href = "/Dashboard"
+        }
     }
     useEffect(()=>{
         async function get(){

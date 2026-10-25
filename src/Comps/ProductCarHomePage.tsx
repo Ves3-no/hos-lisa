@@ -1,11 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { product } from "../types";
 import { motion } from "motion/react";
 import ProductCard from "./ProductCard"
 
 export default function Main({products, addToCart}: {products: product[]  | undefined, addToCart: any}){
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [step, setStep] = useState(340);
 
+    useEffect(()=>{
+        const width = window.innerWidth;
+        if (width >= 1280) {
+            setStep(340); 
+        } else if (width >= 1024) {
+            setStep(320); 
+        } else {
+            setStep(280); 
+        }
+    }, [])
 
     if (!products || products.length === 0) {
         return null;
@@ -20,8 +31,8 @@ export default function Main({products, addToCart}: {products: product[]  | unde
     };
 
     return(
-    <div className="flex flex-col items-center justify-center w-full max-w-5xl mx-auto mt-5 py-4 h-160">
-            <div className="relative h-140 w-full flex items-center justify-center">
+    <div className="flex flex-col items-center justify-center w-full max-w-5xl mx-auto md:mt-5 py-4 h-160 md:h-160">
+            <div className="relative h-150 md:h-150 w-full flex items-center justify-center">
                 {products.map((product, index) => {
                     let offset = index - currentIndex;
                     if (offset > 1) offset -= products.length;
@@ -31,14 +42,14 @@ export default function Main({products, addToCart}: {products: product[]  | unde
                     if (!isVisible) return null;
 
                     return (
-                        <motion.div className="absolute" key={product.id} initial={false} animate={{x: offset * 340, scale: offset === 0 ? 1 : 0.85,opacity: offset === 0 ? 1 : 0.4, zIndex: offset === 0 ? 10 : 1,}}transition={{ duration: 0.4, ease: "easeInOut" }} onClick={() => setCurrentIndex(index)} >
+                        <motion.div className="absolute" key={product.id} initial={false} animate={{x: offset * step, scale: offset === 0 ? 1 : 0.85,opacity: offset === 0 ? 1 : 0.4, zIndex: offset === 0 ? 10 : 1,}} transition={{ duration: 0.4, ease: "easeInOut" }} onClick={() => setCurrentIndex(index)} >
                             <ProductCard product={product} index={index} addToCart={addToCart} />
                         </motion.div>
                     )
                 })}
             </div>
 
-            <div className="flex items-center gap-6 mt-12">
+            <div className="flex items-center gap-6 mt-6 md:mt-12">
                 <motion.button onClick={handlePrev} className="btn w-30 bg-brand-primary text-brand-secondary border-brand-primary cursor-pointer" whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }} > ← Forgje</motion.button>
                 <span className="text-sm font-medium text-brand-dark/50"> {currentIndex + 1} av {products.length}</span>
                 <motion.button onClick={handleNext} className="btn w-30 bg-brand-primary text-brand-secondary border-brand-primary cursor-pointer" whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }} >Neste →</motion.button>

@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 
 export default function Main({product, index, removeFromCart} : {product: product, index:number, removeFromCart:any}){
     return(
-        <div key={index} className="flex flex-row gap-2 items-center p-3 bg-brand-light rounded-xl w-fit px-6 w-full">
+        <div key={index} className="flex flex-row gap-2 items-center p-3 bg-brand-light rounded-xl px-6 w-full">
             <img src={product.image_url} className="w-12 object-cover object-[center_60%] aspect-square rounded-md" />
             <h3 className="text-lg font-semibold text-brand-secondary font-heading">{product.name}</h3>
             <p className="font-body text-brand-secondary/60">{product.price}kr</p>
