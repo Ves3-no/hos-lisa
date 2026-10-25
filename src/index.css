@@ -37,17 +37,35 @@ html{
   background-color: var(--color-brand-light);
 }
 
-@keyframes slide {
+@-webkit-keyframes slide {
   from {
-    transform: translate(0);
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
   }
   to {
-    transform: translate(-50%);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
   }
 }
-.carusell{
-  animation: slide 12s linear infinite;
+
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
+.carusell {
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+  -webkit-animation: slide 10s linear infinite;
+  animation: slide 10s linear infinite;
+}
+
 .carusell:hover {
+  -webkit-animation-play-state: paused;
   animation-play-state: paused;
 }
