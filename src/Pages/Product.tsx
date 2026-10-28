@@ -59,7 +59,7 @@ export default function Main({Products, addToCart}: {Products: product[], addToC
                     <input type="number" className="btn-primary p-1 border-brand-primary" value={count} onChange={(e)=> setNumber(Number(e.currentTarget.value))}/>
                 </div>
 
-                <motion.button onClick={()=>{ addToCart(product, count)}} className="btn-primary bg-brand-primary text-brand-light" whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }}>Legg i Handlekurv</motion.button>
+                <motion.button onClick={()=>{ addToCart(product, count)}} className={`btn-primary ${Number(product?.stock) > 0 ? "text-brand-light" : "text-brand-dark" } ${Number(product?.stock) > 0 ? "bg-brand-primary" : "bg-gray-300" }`} whileHover={Number(product?.stock) > 0 ? {scale: 1.05}: {}} whileTap={Number(product?.stock) > 0 ? {scale: 0.97 }: {}} transition={Number(product?.stock) > 0 ? { type: "spring", stiffness: 400, damping: 17 }: {}}>Legg i Handlekurv</motion.button>
                 
                 <p className="p-1 text-brand-secondary/80 text-xs">{Number(product?.stock) > 0 ? "På lager - Kan bestilles" : "Utsolgt - Kan ikke kjøpes"}</p>
                 <div className="flex flex-col md:flex-row gap-8 mt-6 md:mt-12">

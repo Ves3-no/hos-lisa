@@ -85,13 +85,15 @@ function App() {
   }, [])
 
   function addToCart(product: product, count: number){
-    var newcart: product[] = Cart
-    for(let i = 0; i < count; i++){
-      newcart = [...newcart, product]
+    if(product.stock >= count){
+      var newcart: product[] = Cart
+      for(let i = 0; i < count; i++){
+        newcart = [...newcart, product]
+      }
+      setCart(newcart)
+      setCartIsOpen(true)
+      localStorage.setItem("Cart", JSON.stringify(newcart))
     }
-    setCart(newcart)
-    setCartIsOpen(true)
-    localStorage.setItem("Cart", JSON.stringify(newcart))
   }
   function removeFromCart(product: product){
     const indexToRemove = Cart.findIndex(item => item.id === product.id);

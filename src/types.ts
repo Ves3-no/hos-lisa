@@ -57,6 +57,8 @@ export type Order = {
     total_amount : number
     status: OrderStatus
     tracking_number : string | undefined
+    tracking_provider : string | undefined
 }
 
 export type DBPage = "Orders" | "Products" | "Images" | "Sites"
+export type saveTracking = {tracking: string, order: Order}
