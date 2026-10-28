@@ -67,12 +67,12 @@ function App() {
       setCart(cart)
     }
 
-    if(location.pathname != "/Product" && location.pathname != "/" && location.pathname != "/Products"){
+    if(location.pathname.toLocaleLowerCase() != "/product" && location.pathname != "/" && location.pathname != "/products"){
       setDontShowFooter(true)
     } else{
       setDontShowFooter(false)
     }
-    if(location.pathname == "/Dashboard" || location.pathname == "/auth"){
+    if(location.pathname.toLocaleLowerCase() == "/dashboard" || location.pathname == "/auth"){
       setDontShowNav(true)
     } else{
       setDontShowNav(false)

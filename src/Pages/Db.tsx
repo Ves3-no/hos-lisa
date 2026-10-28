@@ -48,6 +48,13 @@ export default function Main({products, pages}:{products: product[], pages: Page
                 const json: Order[] = data as Order[]
               setOrders(json)
             }
+            async function checkIfLoggedInn(){
+                const { data: { user }, error } = await supabase.auth.getUser()
+                if(!user || error){
+                    window.location.href = "/auth"
+                }
+            }
+            checkIfLoggedInn()
             getOrders()
             getImages()
     }, [])
