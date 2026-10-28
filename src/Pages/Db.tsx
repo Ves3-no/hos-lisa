@@ -9,7 +9,7 @@ import Pages from "../Comps/DBSites"
 
 
 
-export default function Main({products, pages}:{products: product[], pages: Page[]}){
+export default function Main({products, pages, setProducts}:{products: product[], pages: Page[], setProducts: any}){
     const [orders, setOrders] = useState<Order[]>([])
     const [images, setImages] =useState<Image[]>([])
     const [previewPages, setPreviewPages] = useState<Page[]>([])
@@ -128,14 +128,7 @@ export default function Main({products, pages}:{products: product[], pages: Page
             }
         }
     }
-    async function sendProduct(id: string) {
-        
-    }
     async function sendPage(id: string) {
-        
-    }
-
-    async function changeProductPreview(id: string) {
         
     }
     async function changePagesPreview(id: string) {
@@ -173,7 +166,7 @@ export default function Main({products, pages}:{products: product[], pages: Page
             </div>
             <div className="w-full">
                 {
-                    page == "Products" ? <Products products={products} /> : page == "Orders" ? <Orders saveOrderTracking={saveOrderTracking} sendOrderStatus={sendOrderStatus} sendOrderTracking={sendOrderTracking} orders={orders}/> : page == "Images" ? <Images /> : <Pages />
+                    page == "Products" ? <Products setProducts={setProducts} showAlert={showAlert} products={products} /> : page == "Orders" ? <Orders saveOrderTracking={saveOrderTracking} sendOrderStatus={sendOrderStatus} sendOrderTracking={sendOrderTracking} orders={orders}/> : page == "Images" ? <Images /> : <Pages />
                 }
             </div>
         </div>

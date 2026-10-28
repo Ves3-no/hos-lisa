@@ -109,7 +109,7 @@ function App() {
         <Route path='/Products' element={<ProductsPage Products={Products} addToCart={addToCart}/>} />
         <Route path='/success' element={<Thanks/>}></Route>
         <Route path='/auth' element={<Auth/>}></Route>
-        <Route path='/Dashboard' element={<Db pages={Pages} products={Products}/>}></Route>
+        <Route path='/Dashboard' element={<Db pages={Pages} products={Products} setProducts={setProducts}/>}></Route>
         <Route path='*' element={<NotFound/>}></Route>
     </Routes>
     <CartComp cartIsOpen={cartIsOpen} Cart={Cart} removeFromCart={removeFromCart}/>

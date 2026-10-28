@@ -37,7 +37,7 @@ export default function Main({orders, sendOrderStatus, sendOrderTracking, saveOr
                 <option value="delivered">Levert</option>
             </motion.select>
         </div>
-        <div className="flex flex-row flex-wrap py-4 gap-8 overflow-scroll scrollbar-none ">
+        <div className="flex flex-row flex-wrap py-4 gap-8 overflow-y-scroll h-[88vh] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
             {filterOrders.map((order, index)=>(
                 <div key={index} className="bg-brand-primary rounded-2xl p-4 flex flex-col font-body text-brand-secondary gap-4 shadow-xl">
                     <h2 className="text-2xl text-brand-light font-heading">Ordre fra: <span className="font-bold">{order.customer_name != undefined ? order.customer_name : order.shipping_address.name }</span></h2>
