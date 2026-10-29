@@ -1,18 +1,24 @@
 import { useEffect, useState } from "react";
 import type { product } from "../types";
 
-import { motion } from "motion/react";
+import { motion, number } from "motion/react";
 
-export default function Main({product} : {product: product}){
+export default function Main({product, setCurrentProductInEdit} : {product: product, setCurrentProductInEdit:any}){
+        useEffect(()=>{
+            var newlist: string[] = []
+                if(product?.image_url) {newlist.push(product?.image_url)}
+                if(product?.image_url_1) {newlist.push(product?.image_url_1)}
+                if(product?.image_url_2) {newlist.push(product?.image_url_2)}
+                setImages(newlist)
+                setCurrentImage(product?.image_url)
+        }, [product])
+        if(!product){
+            return
+        }
         const [images, setImages] = useState<string[]>()
         const [currentImage, setCurrentImage] = useState<string>()
 
         //Editing states
-
-        const[Name, setName]= useState<string>(product.name)
-        const[Price, setPrice]= useState<number>(product.price)
-        const[Description, setDescription]= useState<string>(product.description)
-        const[Stock, setStock]= useState<number>(product.stock)
 
 
     
@@ -39,20 +45,20 @@ export default function Main({product} : {product: product}){
                 </div>
                 </div>
             <div className="w-full">
-                <input className="text-5xl md:text-6xl font-heading text-start font-semibold tracking-wide text-brand-secondary w-120" defaultValue={Name} onChange={(e)=> setName(e.currentTarget.value)} />
-                <p className="text-xl md:text-2xl text-brand-secondary/50 mb-4 md:mb-6"><input type="number" className="w-17" defaultValue={Price} onChange={(e)=> setPrice(Number(e.currentTarget.value))} />Kr</p>
-                <div className="bg-brand-primary p-2 rounded-lg text-brand-light mb-4 md:mb-6">
+                <input type="text" className="text-5xl md:text-6xl font-heading text-start font-semibold tracking-wide text-brand-secondary w-120" value={product.name} onChange={(e)=> setCurrentProductInEdit((prevProduct:product) => ({...prevProduct,name: e.target.value}))} />
+                <p className="text-xl md:text-2xl text-brand-secondary/50 mb-4 md:mb-6"><input type="number" className="w-17" value={product.price} onChange={(e)=> setCurrentProductInEdit((prevProduct:product) => ({...prevProduct, price: Number(e.target.value)}))} />Kr</p>
+                <div className="bg-brand-primary p-2 rounded-lg text-brand-light mb-4 md:mb-6" >
                     <h2 className="text-2xl text-brand-light font-heading font-semibold">Om Vesken</h2>
-                    <textarea className="text-brand-dark w-full" defaultValue={Description} onChange={(e)=> setDescription(e.currentTarget.value)} />
+                    <textarea className="text-brand-dark w-full h-30" value={product.description} onChange={(e)=> setCurrentProductInEdit((prevProduct:product) => ({...prevProduct, description: e.target.value}))} />
                 </div>
                 <div className="flex flex-col gap-1 mb-2" >
                     <label htmlFor="" className="text-brand-secondary">Antall på lager(sett til 0 om du ikke vil ha flere bestillinger):</label>
-                    <input type="number" className="btn-primary p-1 border-brand-primary" defaultValue={Stock} onChange={(e)=> setStock(Number(e.currentTarget.value))}/>
+                    <input type="number" className="btn-primary p-1 border-brand-primary" value={product.stock} onChange={(e)=> setCurrentProductInEdit((prevProduct:product) => ({...prevProduct, stock: Number(e.target.value)}))}/>
                 </div>
 
-                <motion.button className={`btn-primary ${Stock > 0 ? "text-brand-light" : "text-brand-dark" } ${Stock > 0 ? "bg-brand-primary" : "bg-gray-300" }`} whileHover={Stock > 0 ?{scale: 1.05} : {}} whileTap={Stock > 0 ? {scale: 0.97 }: {}} transition={Stock > 0 ? { type: "spring", stiffness: 400, damping: 17 }: {}}>Legg i Handlekurv</motion.button>
+                <motion.button className={`btn-primary ${product.stock > 0 ? "text-brand-light" : "text-brand-dark" } ${product.stock > 0 ? "bg-brand-primary" : "bg-gray-300" }`} whileHover={product.stock > 0 ?{scale: 1.05} : {}} whileTap={product.stock > 0 ? {scale: 0.97 }: {}} transition={product.stock > 0 ? { type: "spring", stiffness: 400, damping: 17 }: {}}>Legg i Handlekurv</motion.button>
                 
-                <p className="p-1 text-brand-secondary/80 text-xs">{Number(Stock) > 0 ? "På lager - Kan bestilles" : "Utsolgt - Kan ikke kjøpes"}</p>
+                <p className="p-1 text-brand-secondary/80 text-xs">{Number(product.stock) > 0 ? "På lager - Kan bestilles" : "Utsolgt - Kan ikke kjøpes"}</p>
                 <div className="flex flex-col md:flex-row gap-8 mt-6 md:mt-12">
                     <div className="flex flex-col justify-start items-center md:max-w-none max-w-54 mx-auto ">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-16 text-brand-secondary p-2 border border-brand-secondary rounded-4xl" viewBox="0 -960 960 960" fill="currentColor"><path d="M880-720v480q0 33-23.5 56.5T800-160H160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720Zm-720 80h640v-80H160v80Zm0 160v240h640v-240H160Zm0 240v-480 480Z"/></svg>
