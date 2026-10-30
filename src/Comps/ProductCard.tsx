@@ -6,7 +6,7 @@ export default function Main({product, index, addToCart} : {product: product, in
     return(
         <motion.div key={index} className="h-auto w-86 md:w-100 bg-brand-primary p-4 md:p-8 rounded-lg shadow-lg shadow-brand-dark/30">
             <div className="overflow-hidden aspect-12/13 w-full">
-                <motion.img whileHover={{scale: 1.125}} transition={{type: "spring", stiffness: 200, damping: 20}} src={product.image_url} className="w-full rounded-lg aspect-12/13 object-bottom object-cover"/>
+                <motion.img whileHover={{scale: 1.125}} transition={{type: "spring", stiffness: 200, damping: 20}} src={product.image_url ?? ""} className="w-full rounded-lg aspect-12/13 object-bottom object-cover"/>
             </div>
             <div className="font-body text-brand-secondary">
                 <h1 className="font-heading text-2xl mt-2">{product.name}</h1>

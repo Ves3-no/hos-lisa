@@ -15,8 +15,6 @@ export default function Main({products, pages, setProducts}:{products: product[]
     const [previewPages, setPreviewPages] = useState<Page[]>([])
     const [alert, setAlert] = useState<string | undefined>(undefined)
 
-    const [cureentEditedPage, setCureentEditedPage] = useState<string>("")
-
     const [page, setPage] = useState<DBPage>("Orders")
 
 
@@ -66,10 +64,7 @@ export default function Main({products, pages, setProducts}:{products: product[]
 
         setAlert(undefined)
     }
-    
-    async function sendImage(id: string) {
-        
-    }
+
     async function sendOrderStatus(order: Order, status: string) {
         const { error } = await supabase
             .from('orders')
@@ -127,12 +122,6 @@ export default function Main({products, pages, setProducts}:{products: product[]
                 showAlert(`Sporing for ${order.shipping_address.name} er lagret`)
             }
         }
-    }
-    async function sendPage(id: string) {
-        
-    }
-    async function changePagesPreview(id: string) {
-        
     }
 
     return(

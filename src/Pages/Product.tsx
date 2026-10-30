@@ -23,7 +23,7 @@ export default function Main({Products, addToCart}: {Products: product[], addToC
                 if(product?.image_url_1) {newlist.push(product?.image_url_1)}
                 if(product?.image_url_2) {newlist.push(product?.image_url_2)}
                 setImages(newlist)
-                setCurrentImage(product?.image_url)
+                setCurrentImage(product?.image_url ?? "")
             } else{
                 setProduct(undefined)
             }

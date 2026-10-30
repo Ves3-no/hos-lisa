@@ -5,7 +5,7 @@ export type product = {
     description: string
     price: number
     stock: number
-    image_url: string
+    image_url: string | null
     image_url_1: string | null
     image_url_2: string | null
 }
