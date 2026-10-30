@@ -25,9 +25,9 @@ export default function Main({products, showAlert, setProducts}: {products: prod
 
     async function Save() {
         if(currentProductInEdit.id == newEmptyProduct.id){
-            CreateNewProduct()
+            await CreateNewProduct()
         } else{
-            SaveProduct()
+            await SaveProduct()
         }
     }
     async function CreateNewProduct() {
