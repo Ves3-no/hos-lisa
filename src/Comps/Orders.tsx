@@ -39,11 +39,11 @@ export default function Main({orders, sendOrderStatus, sendOrderTracking, saveOr
         </div>
         <div className="flex flex-row flex-wrap py-4 gap-8 overflow-y-scroll h-[88vh] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
             {filterOrders.map((order, index)=>(
-                <div key={index} className="bg-brand-primary rounded-2xl p-4 flex flex-col font-body text-brand-secondary gap-4 shadow-xl">
+                <div key={index} className="bg-brand-secondary rounded-2xl p-4 flex flex-col font-body text-brand-light gap-4 shadow-xl">
                     <h2 className="text-2xl text-brand-light font-heading">Ordre fra: <span className="font-bold">{order.customer_name != undefined ? order.customer_name : order.shipping_address.name }</span></h2>
                     <div className="">
                         Status:
-                        <motion.select onChange={(e)=>sendOrderStatus(order, e.currentTarget.value)} defaultValue={order.status} whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }} className="bg-brand-light cursor-pointer rounded-lg p-1 ml-2">
+                        <motion.select onChange={(e)=>sendOrderStatus(order, e.currentTarget.value)} defaultValue={order.status} whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }} className="bg-brand-light text-brand-secondary cursor-pointer rounded-lg p-1 ml-2">
                             <option value="paid">Betalt</option>
                             <option value="pending">Venter</option>
                             <option value="shipped">Sendt</option>
@@ -69,7 +69,7 @@ export default function Main({orders, sendOrderStatus, sendOrderTracking, saveOr
                         <h2 className="text-brand-light text-xl font-heading font-bold">Produkter</h2>
 
                         {order.items.map((item, index)=>(
-                            <div key={index} className="bg-brand-light rounded-2xl p-2">
+                            <div key={index} className="bg-brand-light rounded-2xl p-2 text-brand-secondary">
                                 <h3>Navn: <span className="font-bold">{item.description}</span> </h3>
                                 <p>Antall: {item.quantity}</p>
                                 <p>Pris: {item.amount_total}</p>

@@ -1,49 +1,67 @@
 import { useEffect, useState } from "react";
 import type { product } from "../types";
 
-import { motion, number } from "motion/react";
+import { motion } from "motion/react";
+type image = {
+    index: number
+    url: string
+    isPlaceHolder: boolean
+}
 
-export default function Main({product, setCurrentProductInEdit} : {product: product, setCurrentProductInEdit:any}){
+
+export default function Main({product, setCurrentProductInEdit, addProductImage} : {product: product, setCurrentProductInEdit:any, addProductImage:any}){
         useEffect(()=>{
-            var newlist: string[] = []
-                if(product?.image_url) {newlist.push(product?.image_url)}
-                if(product?.image_url_1) {newlist.push(product?.image_url_1)}
-                if(product?.image_url_2) {newlist.push(product?.image_url_2)}
-                setImages(newlist)
-                setCurrentImage(product?.image_url)
+            const image_1: image = {
+                index: 0,
+                url: product.image_url ?? "",
+                isPlaceHolder: (!product.image_url)
+            }
+            const image_2: image = {
+                index: 1,
+                url: product.image_url_1 ?? "",
+                isPlaceHolder: (!product.image_url_1)
+            }
+            const image_3: image = {
+                index: 2,
+                url: product.image_url_2 ?? "",
+                isPlaceHolder: (!product.image_url_2)
+            }
+            const newList: image[] = [image_1, image_2, image_3]
+            setImages(newList)
+            setCurrentImage(image_1)
         }, [product])
         if(!product){
             return
         }
-        const [images, setImages] = useState<string[]>()
-        const [currentImage, setCurrentImage] = useState<string>()
-
-        //Editing states
+        const [images, setImages] = useState<image[]>()
+        const [currentImage, setCurrentImage] = useState<image>()
 
 
-    
-        useEffect(()=>{
-            var newlist: string[] = []
-                if(product?.image_url) {newlist.push(product?.image_url)}
-                if(product?.image_url_1) {newlist.push(product?.image_url_1)}
-                if(product?.image_url_2) {newlist.push(product?.image_url_2)}
-                setImages(newlist)
-                setCurrentImage(product?.image_url)
-        }, [product])
     return(
         <div className="flex flex-col lg:flex-row gap-[2%] mx-auto justify-center items-top font-body">
             <div className=" w-full">
                 <div className="aspect-4/5 overflow-hidden mb-2 rounded-2xl shadow-brand-dark/40 shadow-md">
-                    <motion.img whileHover={{scale: 1.125}} transition={{type: "spring", stiffness: 200, damping: 20}} src={currentImage} alt="" className="rounded-2xl"/>
+                    <motion.div className="relative w-full h-full  inline-block bg-brand-secondary"  whileHover={{scale: 1.075}} transition={{type: "spring", stiffness: 200, damping: 20}}>
+                        <input type="file" accept="image/*" className="bg-brand-secondary absolute inset-0 opacity-0 w-full h-full cursor-pointer z-10" onChange={(e)=>addProductImage(product, currentImage?.index, e.target.files?.[0])}/>
+                        {   currentImage?.isPlaceHolder ?
+                            <motion.div  className="rounded-2xl cursor-pointer object-cover bg-brand-secondary h-full w-full flex justify-center items-center font-heading text-white text-2xl"><p>Trykk for å laste opp bilde</p></motion.div>
+                            :
+                            <motion.img src={currentImage?.url} alt="" className="rounded-2xl cursor-pointer object-cover"/>
+                        }
+                    </motion.div>
                 </div>
                 <div className="flex justify-between">
                     {images?.map((img, index)=>(
                         <div key={index} className={`border-brand-secondary ${currentImage === img ? "border-2" : "border-0"} cursor-pointer aspect-square overflow-hidden w-[30%] rounded-xl `}>
-                            <motion.img whileTap={{scale:0.975}} whileHover={{scale: 1.125}} transition={{type: "spring", stiffness: 200, damping: 20}} src={img} className="rounded-xl -mt-8" onClick={()=> setCurrentImage(img)}/>
+                            { img.isPlaceHolder ?
+                                <motion.div className="rounded-xl bg-brand-primary w-full h-full aspect-square" onClick={()=> setCurrentImage(img)}/>
+                                :
+                                <motion.img whileTap={{scale:0.975}} whileHover={{scale: 1.125}} transition={{type: "spring", stiffness: 200, damping: 20}} src={img.url} className="rounded-xl -mt-8 bg-brand-secondary w-full" onClick={()=> setCurrentImage(img)}/>
+                            }
                         </div>
                     ))}
                 </div>
-                </div>
+            </div>
             <div className="w-full">
                 <input type="text" className="text-5xl md:text-6xl font-heading text-start font-semibold tracking-wide text-brand-secondary w-120" value={product.name} onChange={(e)=> setCurrentProductInEdit((prevProduct:product) => ({...prevProduct,name: e.target.value}))} />
                 <p className="text-xl md:text-2xl text-brand-secondary/50 mb-4 md:mb-6"><input type="number" className="w-17" value={product.price} onChange={(e)=> setCurrentProductInEdit((prevProduct:product) => ({...prevProduct, price: Number(e.target.value)}))} />Kr</p>
@@ -57,7 +75,7 @@ export default function Main({product, setCurrentProductInEdit} : {product: prod
                 </div>
 
                 <motion.button className={`btn-primary ${product.stock > 0 ? "text-brand-light" : "text-brand-dark" } ${product.stock > 0 ? "bg-brand-primary" : "bg-gray-300" }`} whileHover={product.stock > 0 ?{scale: 1.05} : {}} whileTap={product.stock > 0 ? {scale: 0.97 }: {}} transition={product.stock > 0 ? { type: "spring", stiffness: 400, damping: 17 }: {}}>Legg i Handlekurv</motion.button>
-                
+
                 <p className="p-1 text-brand-secondary/80 text-xs">{Number(product.stock) > 0 ? "På lager - Kan bestilles" : "Utsolgt - Kan ikke kjøpes"}</p>
                 <div className="flex flex-col md:flex-row gap-8 mt-6 md:mt-12">
                     <div className="flex flex-col justify-start items-center md:max-w-none max-w-54 mx-auto ">

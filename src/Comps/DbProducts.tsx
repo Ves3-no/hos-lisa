@@ -77,6 +77,54 @@ export default function Main({products, showAlert, setProducts}: {products: prod
             setCurrentProductInEditOriginal(product)
         } else{
             setShowSavingPopUp(true)
+            setCurrentProductInEditOriginal(product)
+        }
+    }
+    function changeProductInEditCancel(product: product){
+        setShowSavingPopUp(false)
+        setCurrentProductInEdit(product)
+        setCurrentProductInEditOriginal(product)
+    }
+    async function changeProductInEditSave(product: product){
+        setShowSavingPopUp(false)
+        await SaveProduct()
+        setCurrentProductInEdit(product)
+        setCurrentProductInEditOriginal(product)
+    }
+    async function addProductImage(product: product, index: number, image: File  ){
+        const path = `Vesker/${product.id}_Image_${index+1}.png`
+        const { error } = await supabase
+            .storage
+            .from('Veske_Bilder')
+            .upload(path, image, {
+                cacheControl: '3600',
+                upsert: true
+            })
+        if(error?.message){
+            showAlert("feil melding fra opplastning av bildet til storage: " + error.message)
+            return
+        }
+        const { data: urlData } = supabase
+            .storage
+            .from('Veske_Bilder')
+            .getPublicUrl(path)
+        if(urlData){
+            const freshUrl = `${urlData.publicUrl}?t=${Date.now()}`;
+            const { data, error: productError } = await supabase
+                .from('products')
+                .update({[index === 0 ? 'image_url' : index === 1 ? 'image_url_1' : 'image_url_2']:  freshUrl})
+                .eq(`id`, product.id)
+                .select()
+                .single();
+            if(productError){
+                showAlert("Feilmelding fra opplasting av url: " + productError.message)
+            } else{
+                showAlert(`La til bildet i produktet ${data.name}`)
+                setProducts(products.map(product =>
+                    product.id === data.id ? data : product
+                ))
+                await changeProductInEditSave(data)
+            }
         }
     }
 
@@ -92,8 +140,8 @@ export default function Main({products, showAlert, setProducts}: {products: prod
                 >
                 <h3 className="font-semibold font-heading text-2xl text-center mb-4">Husk å lagre</h3>
                 <div className="flex flex-row gap-4">
-                    <motion.button className="btn-secondary" whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }}>Avbryt</motion.button>
-                    <motion.button className="btn-primary" whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }}>Lagre</motion.button>
+                    <motion.button className="btn-secondary" onClick={()=>changeProductInEditCancel(currentProductInEditOriginal)} whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }}>Avbryt</motion.button>
+                    <motion.button className="btn-primary" onClick={()=>changeProductInEditSave(currentProductInEditOriginal)} whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }}>Lagre</motion.button>
                 </div>
                 </motion.div>
             )}
@@ -103,7 +151,7 @@ export default function Main({products, showAlert, setProducts}: {products: prod
                 <h1 className="text-4xl font-heading text-start font-semibold tracking-wide text-brand-secondary">Produkter</h1>
                 {products.map((product, index)=>(
                     <motion.div key={index} whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }} className="flex flex-row gap-2 items-center p-3 bg-brand-primary rounded-xl px-6 w-full cursor-pointer" onClick={()=>{changeProductInEdit(product)}}>
-                        <img src={product.image_url} className="w-12 object-cover object-[center_60%] aspect-square rounded-md" />
+                        <img alt={""} src={product.image_url} className="w-12 object-cover object-[center_60%] aspect-square rounded-md" />
                         <h3 className="text-lg font-semibold text-brand-secondary font-heading">{product.name}</h3>
                         <p className="font-body text-brand-secondary/60">{product.price}kr</p>
                         <motion.button onClick={()=>DeleateProduct(product)} whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }} className= "cursor-pointer text-brand-secondary"><svg className="w-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg></motion.button>
@@ -120,7 +168,7 @@ export default function Main({products, showAlert, setProducts}: {products: prod
             <div className="w-full flex items-center flex-col p-4 gap-4 ">
                 <h2 className="text-4xl font-heading text-start font-semibold tracking-wide text-brand-secondary">Redigering</h2>
                 <div className="rounded-2xl p-4 h-full overflow-hidden">
-                    <ProductCard product={currentProductInEdit} setCurrentProductInEdit={setCurrentProductInEdit}/>
+                    <ProductCard addProductImage={addProductImage} product={currentProductInEdit} setCurrentProductInEdit={setCurrentProductInEdit}/>
                 </div>
             </div>
         </div>
