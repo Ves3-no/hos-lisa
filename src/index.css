@@ -3,7 +3,7 @@
 @theme {
   --color-brand-primary: #D1C3B8;
   --color-brand-dark: #010102;
-  --color-brand-light: #f7f7f7f7;
+  --color-brand-light: #f7f7f7;
   --color-brand-secondary: #4E5B49 ;
   --color-brand-primary-2: #AB9F96;
   
@@ -23,12 +23,11 @@
   background: var(--color-brand-light);
   color: var(--color-brand-secondary);
   border-color: var(--color-brand-light);
-  
 }
 @utility btn-secondary{
 @apply btn;
 border-color: var(--color-brand-light);
-color: var(--color-brand-light)
+color: var(--color-brand-light);
 
 }
 

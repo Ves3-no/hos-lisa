@@ -155,7 +155,7 @@ export default function Main({products, pages, setProducts}:{products: product[]
             </div>
             <div className="w-full">
                 {
-                    page == "Products" ? <Products setProducts={setProducts} showAlert={showAlert} products={products} /> : page == "Orders" ? <Orders saveOrderTracking={saveOrderTracking} sendOrderStatus={sendOrderStatus} sendOrderTracking={sendOrderTracking} orders={orders}/> : page == "Images" ? <Images /> : <Pages />
+                    page == "Products" ? <Products setProducts={setProducts} showAlert={showAlert} products={products} /> : page == "Orders" ? <Orders saveOrderTracking={saveOrderTracking} sendOrderStatus={sendOrderStatus} sendOrderTracking={sendOrderTracking} orders={orders}/> : page == "Images" ? <Images images={images} setImages={setImages}/>  : <Pages />
                 }
             </div>
         </div>
