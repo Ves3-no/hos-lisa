@@ -13,6 +13,7 @@ export type Image = {
     id: string
     use: "carousel" | "header"
     url: string
+    name: string | undefined
 }
 export type CartItem ={
     productId: string

@@ -5,12 +5,12 @@ import type { Image, product } from "../types"
 import { motion } from "motion/react"
 import ImageCarusel from "../Comps/ImageCarusel"
 
-export default function Main({Products, images, addToCart}: {Products: product[] | undefined, images: Image[] | undefined, addToCart:any}){
+export default function Main({Products, images, addToCart, headerImage}: {Products: product[] | undefined, images: Image[] | undefined, addToCart:any, headerImage: string}){
     return(
         <div className="scrollbar-none">
             <div id="Header" className="w-full overflow-x-hidden scrollbar-none">
-                <div className="bg-[url('/photo-1445019980597-93fa8acb246c.avif')] bg-cover bg-center w-full px-8 md:px-32 py-36 h-[80vh]">
-                    <div className="bg-brand-primary md:w-[30%] md:min-w-100 p-6 md:p-12 rounded-2xl gap-8 shadow-xl shadow-brand-dark/50">
+                <div className={`w-full px-8 md:px-32 py-36 h-[80vh] relative overflow-hidden`}>
+                    <div className="relative z-10 bg-brand-primary md:w-[30%] md:min-w-100 p-6 md:p-12 rounded-2xl gap-8 shadow-xl shadow-brand-dark/50">
                         <h1 className="text-6xl font-semibold font-heading text-brand-light text-shadow-2xs text-shadow-brand-light">Hos Lisa</h1>
                         <p className="text-brand-light">- Av Lisa</p>
                         <div className="flex flex-row gap-4 mt-4">
@@ -18,6 +18,7 @@ export default function Main({Products, images, addToCart}: {Products: product[]
                             <motion.a href="#About" className="btn-secondary text-center" whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }}>Om oss</motion.a>
                         </div>
                     </div>
+                    <img src={headerImage} alt="" className="absolute inset-0 w-full h-full object-cover z-0"/>
                 </div>
             </div>
             <section id="ImageCarusell">

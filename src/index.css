@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+
 @theme {
   --color-brand-primary: #D1C3B8;
   --color-brand-dark: #010102;
@@ -36,35 +37,3 @@ html{
   background-color: var(--color-brand-light);
 }
 
-@-webkit-keyframes slide {
-  from {
-    -webkit-transform: translateX(0);
-    transform: translateX(0);
-  }
-  to {
-    -webkit-transform: translateX(-50%);
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes slide {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-.carusell {
-  will-change: transform;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-
-  -webkit-animation: slide 10s linear infinite;
-  animation: slide 10s linear infinite;
-}
-
-.carusell:hover {
-  -webkit-animation-play-state: paused;
-  animation-play-state: paused;
-}

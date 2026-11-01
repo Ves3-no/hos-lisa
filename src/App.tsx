@@ -22,6 +22,7 @@ function App() {
   const [cartIsOpen, setCartIsOpen] = useState<boolean>(false)
   const [images, setImages] = useState<Image[]>([])
   const [dontShowNav, setDontShowNav] = useState<boolean>(false)
+  const [headerImage, setHeaderImage] = useState<string>("")
   const [dontShowFooter, setDontShowFooter] = useState<boolean>(false)
   const location = useLocation();
 
@@ -60,6 +61,18 @@ function App() {
       const json: Image[] = data as Image[]
       setImages(json)
     }
+    async function getHeaderImage() {
+      const {data, error} = await supabase
+        .from("Images")
+        .select()
+        .eq("use", "header")
+        .single();
+      if(error){
+        console.log(error.message)
+        return
+      }
+      setHeaderImage(data.url)
+    }
     function GetCart(){
       let string = localStorage.getItem("Cart")
       if(!string) return
@@ -82,6 +95,7 @@ function App() {
     GetCart()
     getPages()
     getProducts()
+    getHeaderImage()
   }, [])
 
   function addToCart(product: product, count: number){
@@ -104,7 +118,7 @@ function App() {
    <div className='bg-brand-light w-full overflow-x-hidden scrollbar-none'>
     {dontShowNav == false ? <NavComp setCartIsOpen={setCartIsOpen} cartIsOpen={cartIsOpen} />: <></>}
     <Routes>
-        <Route path='/' element={<Home Products={Products} addToCart={addToCart} images={images}/>}/>
+        <Route path='/' element={<Home Products={Products} headerImage={headerImage} addToCart={addToCart} images={images}/>}/>
         <Route path='/Product' element={<ProductPage Products={Products} addToCart={addToCart}/>} />
         <Route path='/Products' element={<ProductsPage Products={Products} addToCart={addToCart}/>} />
         <Route path='/success' element={<Thanks/>}></Route>
