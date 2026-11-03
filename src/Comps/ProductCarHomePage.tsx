@@ -32,7 +32,7 @@ export default function Main({products, addToCart}: {products: product[]  | unde
 
     return(
     <div className="flex flex-col items-center justify-center w-full max-w-5xl mx-auto md:mt-5 py-4 h-160 md:h-160">
-            <div className="relative h-150 md:h-150 w-full flex items-center justify-center">
+            <div className="relative h-150 md:h-150 w-full flex items-center justify-center" style={{willChange: "contents, transform, left, left"}}> 
                 {products.map((product, index) => {
                     let offset = index - currentIndex;
                     if (offset > 1) offset -= products.length;
@@ -42,7 +42,7 @@ export default function Main({products, addToCart}: {products: product[]  | unde
                     if (!isVisible) return null;
 
                     return (
-                        <motion.div className="absolute" key={product.id} initial={false} animate={{x: offset * step, scale: offset === 0 ? 1 : 0.85,opacity: offset === 0 ? 1 : 0.4, zIndex: offset === 0 ? 10 : 1,}} transition={{ duration: 0.4, ease: "easeInOut" }} onClick={() => setCurrentIndex(index)} >
+                        <motion.div className="absolute" key={product.id} initial={false} style={{willChange: "contents, transform, left, left"}} animate={{x: offset * step, scale: offset === 0 ? 1 : 0.85,opacity: offset === 0 ? 1 : 0.4, zIndex: offset === 0 ? 10 : 1,}} transition={{ duration: 0.4, ease: "easeInOut" }} onClick={() => setCurrentIndex(index)} >
                             <ProductCard product={product} index={index} addToCart={addToCart} />
                         </motion.div>
                     )
