@@ -46,7 +46,7 @@ export default function Main({Products, images, addToCart, headerImage}: {Produc
                     </div>
                 </div>
                 <div>
-                   <img className="md:w-96 aspect-3/4 object-cover object-bottom-left rounded-t-2xl md:rounded-2xl" src="https://sdwtyehzxvwgldfgzsjh.supabase.co/storage/v1/object/public/Veske_Bilder/IMG_2274.JPG" alt="" />
+                   <img className="md:w-96 aspect-3/4 object-cover object-bottom-left rounded-t-2xl md:rounded-2xl" src={`${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/Veske_Bilder/IMG_2274.JPG`} alt="" />
                 </div>
             </section>
             <section className="h-auto mt-8 bg-brand-light flex flex-col-reverse md:flex-row items-center justify-center">
