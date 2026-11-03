@@ -49,6 +49,15 @@ export default function Main({Products, images, addToCart, headerImage}: {Produc
                    <img className="md:w-96 aspect-3/4 object-cover object-bottom-left rounded-t-2xl md:rounded-2xl" src="https://sdwtyehzxvwgldfgzsjh.supabase.co/storage/v1/object/public/Veske_Bilder/IMG_2274.JPG" alt="" />
                 </div>
             </section>
+            <section className="h-auto mt-8 bg-brand-light flex flex-col-reverse md:flex-row items-center justify-center">
+                <div className="relative w-[90%] md:w-[60%] bg-[url('/VeskeMedNavn.jpg')] p-6 bg-cover bg-[center_60%] h-110 rounded-2xl">
+                    <div className="relative bg-brand-light md:w-[40%] h-auto rounded-2xl p-4">
+                        <h2 className="text-3xl font-heading font-bold text-brand-secondary">Få med ingravert navn</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et nisi ducimus perferendis minus consequatur culpa cumque ut nobis placeat, laboriosam quidem, deleniti quam quo sequi vel, tempore aut dolor magnam?</p>
+                    </div>
+                    <motion.button className="btn-primary bg-brand-primary border-brand-primary absolute bottom-6 right-6 text-brand-light shadow-2xl shadow-brand-dark/60" whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }}>Kjøp nå</motion.button>
+                </div>
+            </section>
         </div>
     )
 }

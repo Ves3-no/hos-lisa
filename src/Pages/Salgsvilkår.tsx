@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import type { Page } from "../types";
 
 export default function Main({page}: {page: Page | undefined}){

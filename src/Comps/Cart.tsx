@@ -6,6 +6,7 @@ import { supabase } from "../supabase"
 
 export default function Main({cartIsOpen, Cart, removeFromCart }: {cartIsOpen: boolean, Cart: product[], removeFromCart:any}){
     const [total, setTotal] = useState<number>(0)
+    const[acceptedTerms, setAcceptedTerms] = useState<boolean>(false)
     useEffect(()=>{
         var totalnow = 0
         Cart.forEach(item => {
@@ -25,20 +26,22 @@ export default function Main({cartIsOpen, Cart, removeFromCart }: {cartIsOpen: b
         }))
     }
     async function HandleCheckOut(){
-        var Items: CartItem[] = Sort(Cart)
+        if(acceptedTerms){
+            var Items: CartItem[] = Sort(Cart)
 
-        try {
-            const { data, error } = await supabase.functions.invoke('create-checkout-session', {
-                body: { items: Items },
-            })
-            if(error){
-                console.log(error.message)
+            try {
+                const { data, error } = await supabase.functions.invoke('create-checkout-session', {
+                    body: { items: Items },
+                })
+                if(error){
+                    console.log(error.message)
+                }
+                if (data?.url) {
+                    window.location.href = data.url;
+                } 
+            } catch(err){
+                console.log(err)
             }
-            if (data?.url) {
-                window.location.href = data.url;
-            } 
-        } catch(err){
-            console.log(err)
         }
     }
     return(
@@ -51,6 +54,10 @@ export default function Main({cartIsOpen, Cart, removeFromCart }: {cartIsOpen: b
                     ))}
                 </div>
                 <p className="font-body text-lg text-brand-light ">Pris: {total}kr</p>
+                <div className="flex flex-row gap-2 text-sm text-brand-light/70 p-0.5 -mt-4">
+                    <input type="checkbox" checked={acceptedTerms} onChange={(e)=> setAcceptedTerms(e.currentTarget.checked)}/>
+                    <p>For å fortsett må du godkjenne våre <a className="underline font-bold" href="/Salgsvilkar">Salgsvilkår</a></p>
+                </div>
                 <motion.button className="btn-primary " onClick={()=>HandleCheckOut()} whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }}>Gå til betaling</motion.button>
             </motion.div> : null}
         </AnimatePresence>

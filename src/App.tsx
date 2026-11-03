@@ -84,7 +84,7 @@ function App() {
       setCart(cart)
     }
 
-    if(location.pathname.toLocaleLowerCase() != "/product" && location.pathname != "/" && location.pathname != "/products"){
+    if(location.pathname.toLocaleLowerCase() == "/dashboard" || location.pathname == "/auth"){
       setDontShowFooter(true)
     } else{
       setDontShowFooter(false)
