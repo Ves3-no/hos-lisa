@@ -2,7 +2,7 @@ import { motion } from "motion/react"
 import { Link } from "react-router-dom"
 export default function Main(){
     return(
-        <footer className="p-1 bg-brand-primary font-body sticky bottom-0 mt-10">
+        <footer className="p-1 bg-brand-primary font-body sticky bottom-0 mt-10 text-[14px] md:text-[16px]">
             <h2 className="text-brand-secondary italic font-heading text-4xl block md:hidden mx-auto w-40 text-center">HOS LISA</h2>
             <div className="grid md:grid-cols-3 grid-cols-2 gap-2 lg:px-30 md:pt-10 px-4 pt-4">
                 <div className="justify-center hidden md:flex">
@@ -12,7 +12,7 @@ export default function Main(){
                     </div>
                 </div>
                 <div className="flex justify-center">
-                    <div >
+                    <div className="w-[98%]">
                         <h4 className="text-brand-secondary font-bold font-heading text-2xl w-50">Sider</h4>
                         <div className="flex flex-col gap-2 italic font-body mt-4 underline text-brand-secondary">
                             <motion.a whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }} href={"/Salgsvilkar"}>Salgsvilkår</motion.a>
@@ -22,8 +22,8 @@ export default function Main(){
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-center text-brand-secondary">
-                    <div>
+                <div className="flex justify-center text-brand-secondary ">
+                    <div className="w-[90%]">
                         <h4 className="text-brand-secondary font-bold font-heading text-2xl w-50">Info</h4>
                         <div>
                             <p>Telefon: <span className="underline italic font-bold ">+47 123 45 678</span></p>
