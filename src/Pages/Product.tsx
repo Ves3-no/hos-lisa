@@ -17,11 +17,12 @@ export default function Main({Products, addToCart}: {Products: product[], addToC
             const productId = searchParams.get("id");
             const prod = Products?.find((prod) => prod.id == productId )
             if(prod){
+                const tempProd: product = prod
                 setProduct(prod)
                 var newlist: string[] = []
-                if(product?.image_url) {newlist.push(product?.image_url)}
-                if(product?.image_url_1) {newlist.push(product?.image_url_1)}
-                if(product?.image_url_2) {newlist.push(product?.image_url_2)}
+                if(product?.image_url) {tempProd?.image_url ? newlist.push(tempProd?.image_url): ""}
+                if(product?.image_url_1) {tempProd?.image_url_1 ? newlist.push(tempProd?.image_url_1): ""}
+                if(product?.image_url_2) {tempProd?.image_url_2 ? newlist.push(tempProd?.image_url_2): ""}
                 setImages(newlist)
                 setCurrentImage(product?.image_url ?? "")
             } else{
@@ -31,6 +32,7 @@ export default function Main({Products, addToCart}: {Products: product[], addToC
     }, [Products])
     
     useEffect(()=>{ if(product == undefined && Products[0]) navigate("/")},[product])
+
 
     return(
         <div className="md:p-8 mt-26 flex flex-col lg:flex-row gap-[2%] mx-auto w-[80%] justify-center items-top font-body">
