@@ -12,7 +12,7 @@ export default function Main(){
                     </div>
                 </div>
                 <div className="flex justify-center">
-                    <div className="w-[98%]">
+                    <div className="w-[98%] lg:w-auto">
                         <h4 className="text-brand-secondary font-bold font-heading text-2xl w-50">Sider</h4>
                         <div className="flex flex-col gap-2 italic font-body mt-4 underline text-brand-secondary">
                             <motion.a whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }} href={"/Salgsvilkar"}>Salgsvilkår</motion.a>
@@ -23,7 +23,7 @@ export default function Main(){
                     </div>
                 </div>
                 <div className="flex justify-center text-brand-secondary ">
-                    <div className="w-[90%]">
+                    <div className="w-[90%] lg:w-auto">
                         <h4 className="text-brand-secondary font-bold font-heading text-2xl w-50">Info</h4>
                         <div>
                             <p>Telefon: <span className="underline italic font-bold ">+47 123 45 678</span></p>

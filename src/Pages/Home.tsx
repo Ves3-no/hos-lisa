@@ -12,7 +12,7 @@ export default function Main({Products, images, addToCart, headerImage}: {Produc
                 <div className={`w-full px-8 md:px-32 py-36 h-[80vh] relative overflow-hidden`}>
                     <div className="relative z-10 bg-brand-primary md:w-[30%] md:min-w-100 p-6 md:p-12 rounded-2xl gap-8 shadow-xl shadow-brand-dark/50">
                         <h1 className="text-6xl font-semibold font-heading text-brand-light text-shadow-2xs text-shadow-brand-light">Hos Lisa</h1>
-                        <p className="text-brand-light">- Av Lisa</p>
+                        <p className="text-brand-light">- Av Lisa Eriksmoen</p>
                         <div className="flex flex-row gap-4 mt-4">
                             <motion.a href="/Products" className="btn-primary text-center" whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }}>Våre Produkter</motion.a>
                             <motion.a href="#About" className="btn-secondary text-center" whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }}>Om oss</motion.a>
@@ -31,7 +31,7 @@ export default function Main({Products, images, addToCart, headerImage}: {Produc
             <section id="About" className="h-auto p-8 bg-brand-primary flex flex-col-reverse md:flex-row items-center justify-center ">
                 <div className="md:w-152 bg-brand-light p-8 rounded-b-2xl md:rounded-l-2xl ">
                     <h1 className="font-semibold font-heading md:text-4xl text-4xl mb-px text-brand-secondary">Hos Lisa</h1>
-                    <p className="font-body text-brand-dark mt-2">Hos Lisa er en liten veske­bedrift fra Trondheim, med fokus på stil, detaljer og personlighet. Alle veskene håndlages med kjærlighet og omtanke, og hver veske har sitt eget unike uttrykk. Målet er å skape en merkevare hvor du kan finne en veske som føles helt spesiell – og kanskje blir din nye favoritt. Ta kontakt på <span className="font-semibold">+47 123 45 678</span> om du lurer på noe</p>
+                    <p className="font-body text-brand-dark mt-2">Hos Lisa er en liten veske­bedrift fra Trondheim, med fokus på stil, detaljer og personlighet. Alle veskene håndlages med kjærlighet og omtanke, og hver veske har sitt eget unike uttrykk. Målet er å skape en merkevare hvor du kan finne en veske som føles helt spesiell – og kanskje blir din nye favoritt. Navnet Hos Lisa er inspirert av min mors merke, Hos Trude. Det er en hyllest til hennes kreativitet og en videreføring av gleden ved å skape noe personlig, unikt og håndlaget. Ta kontakt på <span className="font-semibold">+47 123 45 678</span> om du lurer på noe</p>
                     <div className="flex flex-row gap-4 items-center font-body mt-4">
                         <motion.a href="/Products" whileHover={{y: -3, scale: 1.05}} whileTap={{y: 1.5, scale: 0.98}} transition={{type: "spring", stiffness: 400, damping: 16}} className="btn-primary text-center p-1 bg-brand-primary text-brand-light border-brand-primary ">Produkter</motion.a>
                         <motion.div whileHover={{y: -3, scale: 1.05}} whileTap={{y: 1.5, scale: 0.98}} transition={{type: "spring", stiffness: 400, damping: 16}} className=" h-8 w-8 text-brand-primary rounded-sm">
@@ -53,9 +53,14 @@ export default function Main({Products, images, addToCart, headerImage}: {Produc
                 <div className="relative w-[90%] md:w-[60%] bg-[url('/VeskeMedNavn.jpg')] p-6 bg-cover bg-[center_60%] h-110 rounded-2xl">
                     <div className="relative bg-brand-light md:w-[40%] h-auto rounded-2xl p-4">
                         <h2 className="text-3xl font-heading font-bold text-brand-secondary">Få med ingravert navn</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et nisi ducimus perferendis minus consequatur culpa cumque ut nobis placeat, laboriosam quidem, deleniti quam quo sequi vel, tempore aut dolor magnam?</p>
+                        <p>
+                            Ønsker du å sette ditt eget preg på vesken? Nå kan du få brodert navnet ditt på innsiden! ♡
+
+                            En liten, eksklusiv detalj som gjør vesken ekstra spesiell – og som gjør den til din helt egen. Perfekt også som en personlig gave!
+                        </p>
+                        <p className="mt-2 underline">Legg til personlig brodering for kun 49 kr! ♡</p>
                     </div>
-                    <motion.button className="btn-primary bg-brand-primary border-brand-primary absolute bottom-6 right-6 text-brand-light shadow-2xl shadow-brand-dark/60" whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }}>Kjøp nå</motion.button>
+                    <motion.a href="/Products" className="btn-primary text-center bg-brand-primary border-brand-primary absolute bottom-6 right-6 text-brand-light shadow-2xl shadow-brand-dark/60" whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }}>Kjøp nå</motion.a>
                 </div>
             </section>
         </div>
