@@ -12,6 +12,10 @@ import Thanks from "./Pages/Thanks.tsx"
 import Auth from "./Pages/Auth.tsx"
 import Db from "./Pages/Db.tsx"
 import NotFound from "./Pages/SiteNotFound.tsx"
+import AngrerettOgAngreskjema from "./Pages/Angrerett og Angreskjema.tsx"
+import Personvernerklering from "./Pages/Personvernerklæring.tsx"
+import Salgsvilkar from "./Pages/Salgsvilkår.tsx"
+
 
 
 
@@ -125,6 +129,9 @@ function App() {
         <Route path='/auth' element={<Auth/>}></Route>
         <Route path='/Dashboard' element={<Db pages={Pages} products={Products} setProducts={setProducts}/>}></Route>
         <Route path='*' element={<NotFound/>}></Route>
+        <Route path='/Personvernerklering' element={<Personvernerklering page={Pages.find((page) => page.id == "1ba24537-0f41-4a90-99c1-70486acf93e1")}/>}></Route>
+        <Route path='/Salgsvilkar' element={<Salgsvilkar page={Pages.find((page) => page.id == "df3066e6-9d6f-4858-9265-42a62b918b2d")}/>}></Route>
+        <Route path='/AngrerettOgAngreskjema' element={<AngrerettOgAngreskjema page={Pages.find((page) => page.id == "23ab45a7-3d14-4bcc-af73-2bef822b49d8")}/>}></Route>
     </Routes>
     <CartComp cartIsOpen={cartIsOpen} Cart={Cart} removeFromCart={removeFromCart}/>
     {dontShowFooter == false ? <FooterComp /> : <></>}

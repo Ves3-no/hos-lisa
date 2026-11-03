@@ -43,7 +43,7 @@ export default function Main({previewPages, setPreviewPages, showAlert}: {previe
         if(error){
             showAlert(error.message)
         } else{
-            showAlert(`Redigerte produktet ${data.name}`)
+            showAlert(`Lagret siden ${data.Header}`)
             setPreviewPages(previewPages.map(page => 
                 page.id === data.id ? data : page
             ))
