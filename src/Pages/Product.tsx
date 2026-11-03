@@ -15,21 +15,22 @@ export default function Main({Products, addToCart}: {Products: product[], addToC
     useEffect(()=>{
         if(Products[0]){
             const productId = searchParams.get("id");
-            const prod = Products?.find((prod) => prod.id == productId )
+            const prod = Products?.find((p) => p.id == productId )
             if(prod){
-                const tempProd: product = prod
                 setProduct(prod)
-                var newlist: string[] = []
-                if(product?.image_url) {tempProd?.image_url ? newlist.push(tempProd?.image_url): ""}
-                if(product?.image_url_1) {tempProd?.image_url_1 ? newlist.push(tempProd?.image_url_1): ""}
-                if(product?.image_url_2) {tempProd?.image_url_2 ? newlist.push(tempProd?.image_url_2): ""}
+                const newlist: string[] = []
+                
+                if(prod.image_url) newlist.push(prod.image_url)
+                if(prod.image_url_1) newlist.push(prod.image_url_1)
+                if(prod.image_url_2) newlist.push(prod.image_url_2)
+                
                 setImages(newlist)
-                setCurrentImage(product?.image_url ?? "")
+                setCurrentImage(prod.image_url ?? "")
             } else{
                 setProduct(undefined)
             }
         }
-    }, [Products])
+    }, [Products, searchParams])
     
     useEffect(()=>{ if(product == undefined && Products[0]) navigate("/")},[product])
 
