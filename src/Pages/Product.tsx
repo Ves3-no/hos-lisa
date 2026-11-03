@@ -39,12 +39,12 @@ export default function Main({Products, addToCart}: {Products: product[], addToC
         <div className="md:p-8 mt-26 flex flex-col lg:flex-row gap-[2%] mx-auto w-[80%] justify-center items-top font-body">
             <div className=" w-full lg:w-[35%]">
                 <div className="aspect-4/5 overflow-hidden mb-2 rounded-2xl shadow-brand-dark/40 shadow-md">
-                    <motion.img whileHover={{scale: 1.125}} transition={{type: "spring", stiffness: 200, damping: 20}} src={currentImage} alt="" className="rounded-2xl"/>
+                    <motion.img loading="lazy" whileHover={{scale: 1.125}} transition={{type: "spring", stiffness: 200, damping: 20}} src={currentImage} alt="" className="rounded-2xl"/>
                 </div>
                 <div className="flex justify-between">
                     {images?.map((img, index)=>(
                         <div key={index} className={`border-brand-secondary ${currentImage === img ? "border-2" : "border-0"} cursor-pointer aspect-square overflow-hidden w-[30%] rounded-xl `}>
-                            <motion.img whileTap={{scale:0.975}} whileHover={{scale: 1.125}} transition={{type: "spring", stiffness: 200, damping: 20}} src={img} className="rounded-xl -mt-8" onClick={()=> setCurrentImage(img)}/>
+                            <motion.img loading="lazy" whileTap={{scale:0.975}} whileHover={{scale: 1.125}} transition={{type: "spring", stiffness: 200, damping: 20}} src={img} className="rounded-xl -mt-8" onClick={()=> setCurrentImage(img)}/>
                         </div>
                     ))}
                 </div>

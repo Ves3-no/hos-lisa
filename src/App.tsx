@@ -31,7 +31,7 @@ function App() {
   const location = useLocation();
 
   useEffect(()=> {
-    async function getProducts(){
+    async function getPages(){
       const {data, error} = await supabase
         .from("pages")
         .select()
@@ -42,7 +42,7 @@ function App() {
       const json: Page[] = data as Page[]
       setPages(json)
     }
-    async function getPages(){
+    async function getProducts(){
       const {data, error} = await supabase
         .from("products")
         .select()

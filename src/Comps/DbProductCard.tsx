@@ -46,7 +46,7 @@ export default function Main({product, setCurrentProductInEdit, addProductImage}
                         {   currentImage?.isPlaceHolder ?
                             <motion.div  className="rounded-2xl cursor-pointer object-cover bg-brand-secondary h-full w-full flex justify-center items-center font-heading text-white text-2xl"><p>Trykk for å laste opp bilde</p></motion.div>
                             :
-                            <motion.img src={currentImage?.url} alt="" className="rounded-2xl cursor-pointer object-cover"/>
+                            <motion.img loading="lazy" src={currentImage?.url} alt="" className="rounded-2xl cursor-pointer object-cover"/>
                         }
                     </motion.div>
                 </div>
@@ -56,7 +56,7 @@ export default function Main({product, setCurrentProductInEdit, addProductImage}
                             { img.isPlaceHolder ?
                                 <motion.div className="rounded-xl bg-brand-primary w-full h-full aspect-square" onClick={()=> setCurrentImage(img)}/>
                                 :
-                                <motion.img whileTap={{scale:0.975}} whileHover={{scale: 1.125}} transition={{type: "spring", stiffness: 200, damping: 20}} src={img.url} className="rounded-xl -mt-8 bg-brand-secondary w-full" onClick={()=> setCurrentImage(img)}/>
+                                <motion.img loading="lazy" whileTap={{scale:0.975}} whileHover={{scale: 1.125}} transition={{type: "spring", stiffness: 200, damping: 20}} src={img.url} className="rounded-xl -mt-8 bg-brand-secondary w-full" onClick={()=> setCurrentImage(img)}/>
                             }
                         </div>
                     ))}
