@@ -59,7 +59,7 @@ export default function Main({images, setImages, showAlert}: {images: Image[], s
         if (urlData) {
             const {data, error: imageError} = await supabase
                 .from('Images')
-                .insert({use : "carousel", url: urlData.publicUrl, name: image.name})
+                .insert({use : "carousel", url: urlData.publicUrl, name: `${cleanName}.webp`})
                 .select()
                 .single();
             if (imageError) {
