@@ -25,14 +25,28 @@ export default function Main({images, setImages, showAlert}: {images: Image[], s
         setImages(images.filter(img => img.id !== image.id));
         showAlert(`Slettet bildet ${image.name}`)
     }
+    const convertToWebP = (file: File) => new Promise((resolve) => {
+        const img = new Image();
+        img.src = URL.createObjectURL(file);
+        img.onload = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = 1200;
+            canvas.height = (img.height * 1200) / img.width;
+            canvas?.getContext('2d')?.drawImage(img, 0, 0, canvas.width, canvas.height);
+            canvas.toBlob((blob) => resolve(blob), 'image/webp', 0.8);
+        }
+    })
     async function AddImage(image: File){
-        const path = `Nettsiden/${image.name}.png`
+        const cleanName = image.name.replace(/\.[^/.]+$/, "")
+        const path = `Nettsiden/${cleanName}.webp`
+        const webpBlob = await convertToWebP(image)
         const {error} = await supabase
             .storage
             .from('Veske_Bilder')
-            .upload(path, image, {
+            .upload(path, webpBlob, {
                 cacheControl: '3600',
-                upsert: true
+                upsert: true,
+                contentType: 'image/webp'
             })
         if (error?.message) {
             showAlert("feil melding fra opplastning av bildet til storage: " + error.message)

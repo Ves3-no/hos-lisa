@@ -93,15 +93,28 @@ export default function Main({products, showAlert, setProducts}: {products: prod
         setCurrentProductInEdit(product)
         setCurrentProductInEditOriginal(product)
     }
+    const convertToWebP = (file: File) => new Promise((resolve) => {
+        const img = new Image();
+        img.src = URL.createObjectURL(file);
+        img.onload = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = 1200;
+            canvas.height = (img.height * 1200) / img.width;
+            canvas?.getContext('2d')?.drawImage(img, 0, 0, canvas.width, canvas.height);
+            canvas.toBlob((blob) => resolve(blob), 'image/webp', 0.8);
+        }
+    })
     async function addProductImage(product: product, index: number, image: File  ){
         if(product.id !== "") {
-            const path = `Vesker/${product.id}_Image_${index + 1}.png`
+            const path = `Vesker/${product.id}_Image_${index + 1}.webp`
+            const webpBlob = await convertToWebP(image)
             const {error} = await supabase
                 .storage
                 .from('Veske_Bilder')
-                .upload(path, image, {
+                .upload(path, webpBlob, {
                     cacheControl: '3600',
-                    upsert: true
+                    upsert: true,
+                    contentType: 'image/webp'
                 })
             if (error?.message) {
                 showAlert("feil melding fra opplastning av bildet til storage: " + error.message)
