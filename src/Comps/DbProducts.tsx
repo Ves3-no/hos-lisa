@@ -103,9 +103,9 @@ export default function Main({products, showAlert, setProducts}: {products: prod
                 canvas.height = (img.height * 1200) / img.width;
                 canvas?.getContext('2d')?.drawImage(img, 0, 0, canvas.width, canvas.height);
                 canvas.toBlob((blob) => resolve(blob), 'image/webp', 0.8);
-            };
-        });
-    };
+            }
+        })
+    }
     async function addProductImage(product: product, index: number, image: File  ){
         if(product.id !== "") {
             const path = `Vesker/${product.id}_Image_${index + 1}.webp`
