@@ -70,7 +70,7 @@ export default function Main({images, setImages, showAlert}: {images: Image[], s
 
     return(<>
         <div className="overflow-y-scroll screen gap-2 scrollbar-none p-8 font-body">
-            <h2 className="text-4xl font-heading text-start font-semibold tracking-wide text-brand-secondary">Bestillinger</h2>
+            <h2 className="text-4xl font-heading text-start font-semibold tracking-wide text-brand-secondary">Bilder</h2>
             <div className="flex flex-row items-center">
                 <p>Sorter etter:</p>
                 <motion.select  whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }} className="bg-brand-secondary text-brand-light cursor-pointer rounded-lg p-1 ml-2">
@@ -79,7 +79,7 @@ export default function Main({images, setImages, showAlert}: {images: Image[], s
                     <option value={"header"}>Header</option>
                 </motion.select>
             </div>
-            <div className="flex flex-row flex-wrap justify-center gap-2 mt-10 items-center ">
+            <div className="flex flex-row flex-wrap justify-center gap-2 mt-10 items-center overflow-y-scroll h-fit max-h-[80vh] scrollbar-none">
                 {images.map((image, index)=>(
                     <div key={index}><ImageComp image={image} DeleateImage={DeleateImage} ChanegImage={ChanegImage}/></div>
                 ))}
@@ -90,6 +90,7 @@ export default function Main({images, setImages, showAlert}: {images: Image[], s
                     </motion.div>
                 </div>
             </div>
+            <p className="mx-auto w-120 text-center text-sm text-black/60 mt-2">PS: Du må ha minst 6 bilder i karusellen for at den skal fungere!</p>
         </div>
     </>)
 }

@@ -19,9 +19,6 @@ export default function Main({products, pages, setProducts}:{products: product[]
 
 
     useEffect(()=>{
-        if(pages){
-            setPreviewPages(pages)
-        }
             async function getImages() {
                 const {data, error} = await supabase
                     .from("Images")
@@ -54,6 +51,11 @@ export default function Main({products, pages, setProducts}:{products: product[]
             getOrders()
             getImages()
     }, [])
+    useEffect(()=>{
+        if(pages){
+            setPreviewPages(pages)
+        }
+    }, [pages])
 
     const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -155,7 +157,7 @@ export default function Main({products, pages, setProducts}:{products: product[]
             </div>
             <div className="w-full">
                 {
-                    page == "Products" ? <Products setProducts={setProducts} showAlert={showAlert} products={products} /> : page == "Orders" ? <Orders saveOrderTracking={saveOrderTracking} sendOrderStatus={sendOrderStatus} sendOrderTracking={sendOrderTracking} orders={orders}/> : page == "Images" ? <Images showAlert={showAlert} images={images} setImages={setImages}/>  : <Pages />
+                    page == "Products" ? <Products setProducts={setProducts} showAlert={showAlert} products={products} /> : page == "Orders" ? <Orders saveOrderTracking={saveOrderTracking} sendOrderStatus={sendOrderStatus} sendOrderTracking={sendOrderTracking} orders={orders}/> : page == "Images" ? <Images showAlert={showAlert} images={images} setImages={setImages}/>  : <Pages showAlert={showAlert} previewPages={previewPages} setPreviewPages={setPreviewPages}/>
                 }
             </div>
         </div>

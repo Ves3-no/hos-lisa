@@ -26,6 +26,7 @@ export type Page = {
     Section_2: string | undefined
     Section_3: string | undefined
     Link: string | undefined
+    Link_Name : string | undefined
 }
 
 export type shipping = {

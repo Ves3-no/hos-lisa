@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { motion } from "motion/react"
-import logo from "/843339068_18117228145909344_2576512124900151496_n.jpg"
+import logo from "/logo.jpg"
 
 
 
