@@ -3,7 +3,7 @@
 User-agent: *
 Allow: /
 
-# Ikke-offentlige app-ruter
+# Ikke-offentlige app-ruter. Produktdetaljer holdes åpne for søkemotorer.
 Disallow: /auth
 Disallow: /Dashboard
 Disallow: /success
