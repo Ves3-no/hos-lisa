@@ -1,7 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 import type { product } from "../types";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 export default function Main({Products, addToCart}: {Products: product[], addToCart: any}){
     const navigate = useNavigate();
@@ -11,6 +11,9 @@ export default function Main({Products, addToCart}: {Products: product[], addToC
     const [images, setImages] = useState<string[]>()
     const [currentImage, setCurrentImage] = useState<string>()
     const [count, setNumber] = useState<number>(1)
+
+    const [wantsIngravedName, setWantsIngravedName] = useState<boolean>(false)
+    const [name, setName] = useState<string | undefined>(undefined)
 
     useEffect(()=>{
         if(Products[0]){
@@ -36,7 +39,7 @@ export default function Main({Products, addToCart}: {Products: product[], addToC
 
 
     return(
-        <div className="md:p-8 mt-26 flex flex-col lg:flex-row gap-[2%] mx-auto w-[80%] justify-center items-top font-body">
+        <div className="md:p-8 mt-26 flex flex-col lg:flex-row gap-[2%] mx-auto w-[90%] justify-center items-top font-body">
             <div className=" w-full lg:w-[35%]">
                 <div className="aspect-4/5 overflow-hidden mb-2 rounded-2xl shadow-brand-dark/40 shadow-md">
                     <motion.img loading="lazy" whileHover={{scale: 1.125}} transition={{type: "spring", stiffness: 200, damping: 20}} src={currentImage} alt="" className="rounded-2xl"/>
@@ -57,14 +60,27 @@ export default function Main({Products, addToCart}: {Products: product[], addToC
                     <p className="text-brand-dark">{product?.description}</p>
                 </div>
 
+                
+                <motion.div layout animate={{height: wantsIngravedName ? "6rem" : "3.6rem"}} transition={{ type: "tween", duration: 0.2, ease: "easeInOut" }} className={`flex flex-col overflow-hidden gap-1 mb-2 border-brand-secondary border item rounded-lg p-2 w-fit`}>
+                    <div className="flex flex-row items-center gap-2"> 
+                        <input type="checkbox" name="" id="" className="h-5" checked={wantsIngravedName} onChange={(e)=> setWantsIngravedName(e.target.checked)}/>
+                        <h4 className="text-brand-secondary font-bold text-sm md:text-md font-heading h-5">Få brodert navnet ditt på innsiden av vesken</h4>
+                    </div>
+                    <AnimatePresence>
+                        {wantsIngravedName && <motion.input value={name} onChange={(e)=> {setName(e.currentTarget.value)}} key="engraved-input h-10" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}  type="text" placeholder="Ditt Navn" className="btn-primary p-1 border-brand-primary"/>}
+                    </AnimatePresence>
+                    <p className="text-brand-secondary/80 text-xs">Navnet broderes på alle [Antall] veskene i denne bestillingen.</p>
+                </motion.div>
+
                 <div className="flex flex-col gap-1 mb-2" >
                     <label htmlFor="" className="text-brand-secondary">Antall:</label>
                     <input type="number" className="btn-primary p-1 border-brand-primary" value={count} onChange={(e)=> setNumber(Number(e.currentTarget.value))}/>
                 </div>
 
-                <motion.button onClick={()=>{ addToCart(product, count)}} className={`btn-primary ${Number(product?.stock) > 0 ? "text-brand-light" : "text-brand-dark" } ${Number(product?.stock) > 0 ? "bg-brand-primary" : "bg-gray-300" }`} whileHover={Number(product?.stock) > 0 ? {scale: 1.05}: {}} whileTap={Number(product?.stock) > 0 ? {scale: 0.97 }: {}} transition={Number(product?.stock) > 0 ? { type: "spring", stiffness: 400, damping: 17 }: {}}>Legg i Handlekurv</motion.button>
-                
+                <motion.button onClick={()=>{ addToCart(product, count, wantsIngravedName, wantsIngravedName ? name : "")}} className={`btn-primary ${Number(product?.stock) > 0 ? "text-brand-light" : "text-brand-dark" } ${Number(product?.stock) > 0 ? "bg-brand-primary" : "bg-gray-300" }`} whileHover={Number(product?.stock) > 0 ? {scale: 1.05}: {}} whileTap={Number(product?.stock) > 0 ? {scale: 0.97 }: {}} transition={Number(product?.stock) > 0 ? { type: "spring", stiffness: 400, damping: 17 }: {}}>Legg i Handlekurv</motion.button>
+
                 <p className="p-1 text-brand-secondary/80 text-xs">{Number(product?.stock) > 0 ? "På lager - Kan bestilles" : "Utsolgt - Kan ikke kjøpes"}</p>
+
                 <div className="flex flex-col md:flex-row gap-8 mt-6 md:mt-12">
                     <div className="flex flex-col justify-start items-center md:max-w-none max-w-54 mx-auto ">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-16 text-brand-secondary p-2 border border-brand-secondary rounded-4xl" viewBox="0 -960 960 960" fill="currentColor"><path d="M880-720v480q0 33-23.5 56.5T800-160H160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720Zm-720 80h640v-80H160v80Zm0 160v240h640v-240H160Zm0 240v-480 480Z"/></svg>
@@ -82,6 +98,9 @@ export default function Main({Products, addToCart}: {Products: product[], addToC
                         <p className="text-xs text-center">Hver eneste veske er unikt håndlaget med stor nøyaktighet og kjærlighet for faget.</p>
                     </div>
                 </div>
+
+                
+
             </div>
         </div>
     )

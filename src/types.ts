@@ -18,6 +18,8 @@ export type Image = {
 export type CartItem ={
     productId: string
     quantity: number
+    with_engraved_name: boolean | undefined
+    engraved_name: string | undefined
 }
 export type Page = {
     id: string
@@ -27,6 +29,11 @@ export type Page = {
     Section_3: string | undefined
     Link: string | undefined
     Link_Name : string | undefined
+}
+export type ProductInCart = {
+    Product: product
+    with_engraved_name: boolean | undefined
+    engraved_name: string | undefined
 }
 
 export type shipping = {
@@ -60,6 +67,13 @@ export type Order = {
     status: OrderStatus
     tracking_number : string | undefined
     tracking_provider : string | undefined
+    engraved_names: engraved_name[] | undefined
+}
+export type engraved_name = {
+    product_id: string
+    with_engraved_name: boolean
+    engraved_name: string
+    extra_price: number
 }
 
 export type DBPage = "Orders" | "Products" | "Images" | "Sites"

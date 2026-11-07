@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import type { product, Image, Page } from './types'
+import type { product, Image, Page, ProductInCart } from './types'
 import { Routes, Route, useLocation} from 'react-router-dom'
 import Home from "./Pages/Home.tsx"
 import CartComp from "./Comps/Cart.tsx"
@@ -20,7 +20,7 @@ import Salgsvilkar from "./Pages/Salgsvilkår.tsx"
 
 
 function App() {
-  const [Cart, setCart] = useState<product[]>([])
+  const [Cart, setCart] = useState<ProductInCart[]>([])
   const [Products, setProducts] = useState<product[]>([])
   const [Pages, setPages] = useState<Page[]>([])
   const [cartIsOpen, setCartIsOpen] = useState<boolean>(false)
@@ -80,7 +80,7 @@ function App() {
     function GetCart(){
       let string = localStorage.getItem("Cart")
       if(!string) return
-      let cart =JSON.parse(string) as product[]
+      let cart =JSON.parse(string) as ProductInCart[]
       setCart(cart)
     }
 
@@ -102,19 +102,25 @@ function App() {
     getHeaderImage()
   }, [])
 
-  function addToCart(product: product, count: number){
+  function addToCart(product: product, count: number, wantsIngravedName: boolean, name: string){
+    const productInCart: ProductInCart = {
+      Product: product,
+      with_engraved_name: wantsIngravedName,
+      engraved_name: name
+    }
+    console.log(wantsIngravedName)
     if(product.stock >= count){
-      var newcart: product[] = Cart
+      var newcart: ProductInCart[] = Cart
       for(let i = 0; i < count; i++){
-        newcart = [...newcart, product]
+        newcart = [...newcart, productInCart]
       }
       setCart(newcart)
       setCartIsOpen(true)
       localStorage.setItem("Cart", JSON.stringify(newcart))
     }
   }
-  function removeFromCart(product: product){
-    const indexToRemove = Cart.findIndex(item => item.id === product.id);
+  function removeFromCart(product: ProductInCart){
+    const indexToRemove = Cart.findIndex(item => item.Product === product.Product);
     setCart([...Cart.slice(0, indexToRemove), ...Cart.slice(indexToRemove + 1)
   ]);
   }
