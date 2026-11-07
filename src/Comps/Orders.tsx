@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { Order, saveTracking } from "../types";
 import { motion } from "motion/react"
-
+import DBProductInOrder from "./DBProductInOrder";
 
 export default function Main({orders, sendOrderStatus, sendOrderTracking, saveOrderTracking}: {orders: Order[], sendOrderStatus: any, sendOrderTracking: any, saveOrderTracking: any}){
     const [filterOrders, setFilterOrders] = useState<Order[]>([])
@@ -69,11 +69,7 @@ export default function Main({orders, sendOrderStatus, sendOrderTracking, saveOr
                         <h2 className="text-brand-light text-xl font-heading font-bold">Produkter</h2>
 
                         {order.items.map((item, index)=>(
-                            <div key={index} className="bg-brand-light rounded-2xl p-2 text-brand-secondary">
-                                <h3>Navn: <span className="font-bold">{item.description}</span> </h3>
-                                <p>Antall: {item.quantity}</p>
-                                <p>Pris: {item.amount_total}</p>
-                            </div>
+                            <DBProductInOrder index={index} product={item} />
                         ))}
 
                         <p>Total pris: <span className="font-bold">{order.total_amount}kr</span></p>

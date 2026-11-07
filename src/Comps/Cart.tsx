@@ -12,6 +12,9 @@ export default function Main({cartIsOpen, Cart, removeFromCart }: {cartIsOpen: b
         Cart.forEach(item => {
             totalnow += item.Product.price
         })
+        Cart.forEach(item=>{
+            item.with_engraved_name == true ? totalnow += 49 : ""
+        })
         setTotal(totalnow)
     }, [Cart])
     async function HandleCheckOut() {

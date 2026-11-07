@@ -1,3 +1,5 @@
+import { number } from "motion"
+
 export type product = {
     id: string
     created_at: any
@@ -49,10 +51,19 @@ export type shipping = {
 }
 
 export type ItemInOrder = {
+    Product: {
+      id: string
+      name: string
+      price: number
+      stock: number
+      image_url: string
+      description: string
+    },
     quantity: number,
-    description: string,
-    amount_total: number
-}
+    unit_amount: number,
+    engraved_name: string,
+    with_engraved_name: boolean
+  }
 
 export type OrderStatus = "paid" | "pending" | "shipped" | "delivered"
 
