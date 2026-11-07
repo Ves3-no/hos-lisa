@@ -1,5 +1,3 @@
-import { number } from "motion"
-
 export type product = {
     id: string
     created_at: any
