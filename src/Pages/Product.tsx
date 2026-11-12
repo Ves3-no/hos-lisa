@@ -15,9 +15,6 @@ export default function Main({Products, addToCart}: {Products: product[], addToC
     const [wantsIngravedName, setWantsIngravedName] = useState<boolean>(false)
     const [name, setName] = useState<string | undefined>(undefined)
 
-    setName(undefined)
-    setWantsIngravedName(false)
-
     useEffect(()=>{
         if(Products[0]){
             const productId = searchParams.get("id");
@@ -35,6 +32,8 @@ export default function Main({Products, addToCart}: {Products: product[], addToC
             } else{
                 setProduct(undefined)
             }
+            setName(undefined)
+            setWantsIngravedName(false)
         }
     }, [Products, searchParams])
     
