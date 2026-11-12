@@ -52,7 +52,7 @@ export default function Main({Products, images, addToCart, headerImage}: {Produc
             <section className="h-auto mt-8 bg-brand-light flex flex-col-reverse md:flex-row items-center justify-center">
                 <div className="relative w-[90%] md:w-[60%] bg-[url('/VeskeMedNavn.jpg')] p-6 bg-cover bg-[center_60%] h-110 rounded-2xl">
                     <div className="relative bg-brand-light md:w-[40%] h-auto rounded-2xl p-4">
-                        <h2 className="text-3xl font-heading font-bold text-brand-secondary">Få med ingravert navn</h2>
+                        <h2 className="text-3xl font-heading font-bold text-brand-secondary">Få med ingravert navn - Kommer Snart!</h2>
                         <p>
                             Ønsker du å sette ditt eget preg på vesken? Nå kan du få brodert navnet ditt på innsiden! ♡
 
