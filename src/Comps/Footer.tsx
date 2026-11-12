@@ -27,7 +27,7 @@ export default function Main(){
                         <h4 className="text-brand-secondary font-bold font-heading text-2xl w-50">Info</h4>
                         <div>
                             <p>Telefon: <span className="underline italic font-bold ">+47 936 47 477</span></p>
-                            <p>Mail: <motion.a className="underline italic font-bold " whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }} href="mailto:info@hoslisa.com">info@hoslisa.com</motion.a></p>
+                            <p>Mail: <motion.a className="underline italic font-bold " whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }} href="mailto:lisaeriksmoen06@gmail.com">lisaeriksmoen06@gmail.com</motion.a></p>
                             <motion.div whileHover={{y: -3, scale: 1.05}} whileTap={{y: 1.5, scale: 0.98}} transition={{type: "spring", stiffness: 400, damping: 16}} className=" h-8 w-8 text-brand-secondary rounded-sm mt-2">
                                 <Link to="https://www.instagram.com/hos.liisa/">
                                     <svg fill="currentColor" id="Camada_1" data-name="Camada 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 597.56 597.5">
