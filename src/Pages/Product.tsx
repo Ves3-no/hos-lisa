@@ -1,7 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 import type { product } from "../types";
 import { useNavigate } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
+import { /*AnimatePresence, */ motion } from "framer-motion";
 import { useEffect, useState } from "react";
 export default function Main({Products, addToCart}: {Products: product[], addToCart: any}){
     const navigate = useNavigate();
@@ -61,7 +61,7 @@ export default function Main({Products, addToCart}: {Products: product[], addToC
                 </div>
 
                 
-                <motion.div layout animate={{height: wantsIngravedName ? "6rem" : "3.6rem"}} transition={{ type: "tween", duration: 0.2, ease: "easeInOut" }} className={`flex flex-col overflow-hidden gap-1 mb-2 border-brand-secondary border item rounded-lg p-2 w-fit`}>
+                {/*<motion.div layout animate={{height: wantsIngravedName ? "6rem" : "3.6rem"}} transition={{ type: "tween", duration: 0.2, ease: "easeInOut" }} className={`flex flex-col overflow-hidden gap-1 mb-2 border-brand-secondary border item rounded-lg p-2 w-fit`}>
                     <div className="flex flex-row items-center gap-2"> 
                         <input type="checkbox" name="" id="" className="h-5" checked={wantsIngravedName} onChange={(e)=> setWantsIngravedName(e.target.checked)}/>
                         <h4 className="text-brand-secondary font-bold text-sm md:text-md font-heading h-5">Få brodert navnet ditt på innsiden av vesken(+49kr)</h4>
@@ -70,7 +70,7 @@ export default function Main({Products, addToCart}: {Products: product[], addToC
                         {wantsIngravedName && <motion.input value={name} onChange={(e)=> {setName(e.currentTarget.value)}} key="engraved-input h-10" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}  type="text" placeholder="Ditt Navn" className="btn-primary p-1 border-brand-primary"/>}
                     </AnimatePresence>
                     <p className="text-brand-secondary/80 text-xs">Navnet broderes på alle [Antall] veskene i denne bestillingen.</p>
-                </motion.div>
+                </motion.div>*/}
 
                 <div className="flex flex-col gap-1 mb-2" >
                     <label htmlFor="" className="text-brand-secondary">Antall:</label>
