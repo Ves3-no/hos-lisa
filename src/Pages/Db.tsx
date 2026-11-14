@@ -34,12 +34,13 @@ export default function Main({products, pages, setProducts}:{products: product[]
                 const {data, error} = await supabase
                     .from("orders")
                     .select()
+                    .order("created_at", { ascending: false });
                 if(error){
                     console.log(error.message)
                     return
                 }
                 const json: Order[] = data as Order[]
-              setOrders(json)
+                setOrders(json)
             }
             async function checkIfLoggedInn(){
                 const { data: { user }, error } = await supabase.auth.getUser()
