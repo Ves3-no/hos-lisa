@@ -34,7 +34,7 @@ export default function Main({products, pages, setProducts}:{products: product[]
                 const {data, error} = await supabase
                     .from("orders")
                     .select()
-                    .order("created_at", { ascending: true });
+                    .order("created_at", { ascending: false });
                 if(error){
                     console.log(error.message)
                     return

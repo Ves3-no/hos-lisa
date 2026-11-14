@@ -10,15 +10,15 @@ export default function Main({orders, sendOrderStatus, sendOrderTracking, saveOr
 
     useEffect(()=>{
         if(orders){
-            setFilterOrders(orders.reverse())
+            setFilterOrders(orders)
         }
     }, [orders])
 
     function sortOrders(value: string){
         if(value == "alle"){
-            setFilterOrders(orders.reverse())
+            setFilterOrders(orders)
         } else {
-            setFilterOrders(orders.filter(order => order.status == value).reverse())
+            setFilterOrders(orders.filter(order => order.status == value))
         }
     }
     
