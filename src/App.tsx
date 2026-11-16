@@ -102,27 +102,42 @@ function App() {
     getHeaderImage()
   }, [])
 
-  function addToCart(product: product, count: number, wantsIngravedName: boolean, name: string){
-    const productInCart: ProductInCart = {
-      Product: product,
-      with_engraved_name: wantsIngravedName,
-      engraved_name: name
-    }
-    console.log(wantsIngravedName)
-    if(product.stock >= count){
-      var newcart: ProductInCart[] = Cart
-      for(let i = 0; i < count; i++){
-        newcart = [...newcart, productInCart]
-      }
-      setCart(newcart)
-      setCartIsOpen(true)
-      localStorage.setItem("Cart", JSON.stringify(newcart))
+  function addToCart(product: product, count: number, wantsIngravedName: boolean, name: string) {
+    const existingCount = Cart.filter(item => item.Product.id === product.id).length;
+  
+    if (product.stock >= existingCount + count) {
+      const productInCart: ProductInCart = {
+        Product: product,
+        with_engraved_name: wantsIngravedName,
+        engraved_name: wantsIngravedName ? name : ""
+      };
+  
+      const itemsToAdd = Array(count).fill(productInCart);
+      const newCart = [...Cart, ...itemsToAdd];
+  
+      setCart(newCart);
+      setCartIsOpen(true);
+      localStorage.setItem("Cart", JSON.stringify(newCart));
     }
   }
-  function removeFromCart(product: ProductInCart){
-    const indexToRemove = Cart.findIndex(item => item.Product === product.Product);
-    setCart([...Cart.slice(0, indexToRemove), ...Cart.slice(indexToRemove + 1)
-  ]);
+  
+  function removeFromCart(product: ProductInCart) {
+    const indexToRemove = Cart.findIndex(
+      item =>
+        item.Product.id === product.Product.id &&
+        item.with_engraved_name === product.with_engraved_name &&
+        item.engraved_name === product.engraved_name
+    );
+
+    if (indexToRemove === -1) return;
+  
+    const newCart = [
+      ...Cart.slice(0, indexToRemove),
+      ...Cart.slice(indexToRemove + 1)
+    ];
+  
+    setCart(newCart);
+    localStorage.setItem("Cart", JSON.stringify(newCart));
   }
   return (
    <div className='bg-brand-light w-full overflow-x-hidden scrollbar-none'>
