@@ -29,6 +29,7 @@ function App() {
   const [headerImage, setHeaderImage] = useState<string>("")
   const [dontShowFooter, setDontShowFooter] = useState<boolean>(false)
   const location = useLocation();
+  const [cartError, setCartError] = useState<string | null>(null)
 
   useEffect(()=> {
     async function getPages(){
@@ -101,10 +102,18 @@ function App() {
     getProducts()
     getHeaderImage()
   }, [])
+  const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
-  function addToCart(product: product, count: number, wantsIngravedName: boolean, name: string) {
+  async function addToCart(product: product, count: number, wantsIngravedName: boolean, name: string) {
     const existingCount = Cart.filter(item => item.Product.id === product.id).length;
-  
+    if (!Number.isInteger(count) && count < 1) return
+    if (Cart.length + count > 3) {
+      setCartError("Du kan maks ha 3 ting i handlekurven!")
+      await sleep(5000)
+      setCartError(null)
+      return
+    }
+
     if (product.stock >= existingCount + count) {
       const productInCart: ProductInCart = {
         Product: product,
@@ -154,7 +163,7 @@ function App() {
         <Route path='/Salgsvilkar' element={<Salgsvilkar page={Pages.find((page) => page.id == "df3066e6-9d6f-4858-9265-42a62b918b2d")}/>}></Route>
         <Route path='/AngrerettOgAngreskjema' element={<AngrerettOgAngreskjema page={Pages.find((page) => page.id == "23ab45a7-3d14-4bcc-af73-2bef822b49d8")}/>}></Route>
     </Routes>
-    <CartComp cartIsOpen={cartIsOpen} Cart={Cart} removeFromCart={removeFromCart}/>
+    <CartComp cartIsOpen={cartIsOpen} Cart={Cart} cartError={cartError} removeFromCart={removeFromCart} setCartError={setCartError}/>
     {dontShowFooter == false ? <FooterComp /> : <></>}
    </div>
   )
