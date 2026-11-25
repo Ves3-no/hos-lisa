@@ -185,7 +185,7 @@ export default function Main({products, showAlert, setProducts}: {products: prod
             )}
         </AnimatePresence>
         <div className="flex flex-row overflow-hidden">
-            <div className="w-[34%] min-w-85 max-w-100 p-4 flex flex-col gap-4 border-r-2 h-screen border-brand-secondary">
+            <div className="w-[34%] min-w-85 max-w-100 p-4 flex flex-col gap-4 border-r-2 h-screen border-brand-secondary overflow-y-scroll">
                 <h1 className="text-4xl font-heading text-start font-semibold tracking-wide text-brand-secondary">Produkter</h1>
                 {products.map((product, index)=>(
                     <motion.div key={index} whileHover={{scale: 1.05}} whileTap={{scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 17 }} className="flex flex-row gap-2 items-center p-3 bg-brand-primary rounded-xl px-6 w-full cursor-pointer" onClick={()=>{changeProductInEdit(product)}}>
